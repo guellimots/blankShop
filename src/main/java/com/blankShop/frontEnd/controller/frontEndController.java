@@ -64,7 +64,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Controller
-@SessionAttributes({ "alertmsg","result" })
+@SessionAttributes({ "alertmsg","result","pageResult"})
 @RequestMapping("/frontEnd")
 public class frontEndController {
 	
@@ -299,9 +299,11 @@ public class frontEndController {
 		}
 		
 	 m.addAttribute("result", result);
+	 m.addAttribute("pageResult", result);
 		
 		return result;	
 	}
+	
 	@PostMapping("/products/searchAll")
 	@ResponseBody
 	public ArrayList<Product> searchAll(@RequestParam("keyword") String keyword, Model m) {
@@ -312,26 +314,27 @@ public class frontEndController {
 		List<Product> duplicateResult=pdService.itemsOfKeyword(keyword);
 		result=new ArrayList<Product>(this.selectDistinctProduct(duplicateResult));
 		m.addAttribute("result", result);
+		m.addAttribute("pageResult", result);
 		return result;	
 	}
 	
 	@GetMapping("/products/orderByDate")
 	@ResponseBody
-	public ArrayList<Product> orderByDate(@ModelAttribute("result") ArrayList<Product> result){
-		Collections.sort(result, new dateComparator());		
-		return result;		
+	public ArrayList<Product> orderByDate(@ModelAttribute("pageResult") ArrayList<Product> pageResult){
+		Collections.sort(pageResult, new dateComparator());		
+		return pageResult;		
 	}
 	
 	@GetMapping("/products/orderByPrice")
 	@ResponseBody
-	public ArrayList<Product> orderByPrice(@ModelAttribute("result") ArrayList<Product> result){  
-	   Collections.sort(result, new priceComparator());
-	   return result;
+	public ArrayList<Product> orderByPrice(@ModelAttribute("pageResult") ArrayList<Product> pageResult){  
+	   Collections.sort(pageResult, new priceComparator());
+	   return pageResult;
 	}
 	
 	
 	@PostMapping("/products/pageFilter")
-	public @ResponseBody ArrayList<Product> pageFilter(@RequestBody HashMap<String, String> filterRequest, @ModelAttribute("result") ArrayList<Product> result){
+	public @ResponseBody ArrayList<Product> pageFilter(@RequestBody HashMap<String, String> filterRequest, @ModelAttribute("result") ArrayList<Product> result, Model m){
 		
 
 		ArrayList<String> genreList=new ArrayList<String>();
@@ -415,6 +418,8 @@ public class frontEndController {
 			}
 		}
 		
+		
+		m.addAttribute("pageResult",filterResult3);
 		
 		return filterResult3;
 	}
