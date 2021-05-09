@@ -5,15 +5,16 @@ for (var i = 0; i < cartItemsObj.length; i++) {
                                                       <div class="shopping-cart-img">
                                                           <a href="#" ><img src="${cartItemsObj[i].productImg}"
                                                               /></a>
-                                                          <div class="item-close">
-                                                              <a href="#"><i class="sli sli-close" id="dele${i}"></i></a>
-                                                          </div>
+                                                          
                                                       </div>
                                                       <div class="shopping-cart-title">
                                                           <h4>
                                                               <a href="#">${cartItemsObj[i].productName}</a>
                                                           </h4>
                                                           <span >數量: ${cartItemsObj[i].amount} 價格: $ ${cartItemsObj[i].price}</span>
+                                                      </div>
+                                                      <div class="item-close">
+                                                          <a href="#"><i class="sli sli-close" id="dele${i}"></i></a>
                                                       </div>
                                                   </li>`;
 
@@ -51,5 +52,5 @@ for (var i = 0; i < cartItemsObj.length; i++) {
 }
 
 $("#subtotal").html(total);
-$("#cartCount").html(i);
-$("#crartTotalPrice").html(total);
+//$("#cartCount").html(i);
+//$("#crartTotalPrice").html(total);
