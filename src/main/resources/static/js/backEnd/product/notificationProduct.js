@@ -2,7 +2,7 @@
 // $(function () {
 
             var stompClient = null;
- 
+           
             connect();
 
             function connect() {
@@ -38,10 +38,9 @@
             }
 
             function onMessageReceived(data) {
-                var list = "";
+                
                var JsonData = JSON.parse(data.body);
-                // 
-                // alert(JsonData[i]["productName"])
+               var list = "";
                 for(let i = 0 ; i<JsonData.length;i++){
                  list +=  "<div class='dropdown-divider'></div>"+
                             "<a  class='dropdown-item'>"+

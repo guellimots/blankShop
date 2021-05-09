@@ -1,30 +1,84 @@
 const url = 'http://localhost:8080/blankShop';
-let stompClient;
+let AdminStompClient;
 let selectedUser;
 let newMessages = new Map();
 let messagesStorage = new Map();
 let currentUser;
+function getMessagesStorage(){
+    return messagesStorage;
+}
+function getNewMessages(){
+    return newMessages;
+}
+
+function enterChatRoom(userName){
+    let usersTemplateHTML = "";
+          
+    usersTemplateHTML = usersTemplateHTML + 
+        '<a href="#" id="'+userName+'" onclick="selectUser(\'' + userName + '\')"><li class="clearfix">\n' +
+        '<img  src="/blankShop/img/product/icon.jpg"" width="100px" height="70px" alt="avatar" />\n' +
+        '<div class="about">\n' +
+        '<div id="userNameAppender_' + userName + '" class="name">' + userName + '</div>\n' +
+        '<div class="status">\n' +
+        '<i class="fa fa-circle offline"></i>\n' +
+        '</div>\n' +
+        '</div>\n' +
+        '</li></a>';         
+       
+        if($("#"+userName).html()==undefined)
+        $('#usersList').append(usersTemplateHTML);
+
+        
+        var cnt= $("#newMessage_"+userName).html()
+        if(cnt==undefined){
+        $('#userNameAppender_' + userName).append('&ensp;&ensp;<span id="newMessage_' + userName + 
+        '" style=" background: green; border-radius: 99em; width:100px;  height:100px;">&ensp;1&ensp;</span>');
+       
+    }
+        else{
+         var tempcnt = parseInt(cnt.substring(0))
+       
+        
+         
+         $("#newMessage_"+userName).html("&ensp;"+(tempcnt+1)+"&ensp;")
+        
+        }
+
+
+
+
+
+}
+
+
 
 function connectToChat(userName) {
     console.log("connecting to chat...")
     let socket = new SockJS(url + '/chat');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
+    AdminStompClient = Stomp.over(socket);
+    AdminStompClient.connect({}, function (frame) {
         console.log("connected to: " + frame);
-        stompClient.subscribe("/topic/messages/" + userName, function (response) {
+        AdminStompClient.subscribe("/topic/messages/" + userName, function (response) {
+            
             let data = JSON.parse(response.body);
             if (selectedUser === data.fromLogin) {
-
+         
+              
                 messagesStorage.set(data.fromLogin+"_"+(messagesStorage.size+1),data.message);
                 
                 
                 newMessages.set(data.fromLogin, messagesStorage);
-
+              parent.$("#msginf").html("")
+              parent.$("#circleOnline").remove();
                 render(data.message, data.fromLogin);
             } else {
               
+            $("#msginf").html("!")
+            
+            $("#userInf").html("  客人聯繫&emsp;<i id='circleOnline' class='fa fa-circle online'></i>")
+            
             let usersTemplateHTML = "";
-           
+          
             usersTemplateHTML = usersTemplateHTML + 
                 '<a href="#" onclick="selectUser(\'' + data.fromLogin + '\')"><li class="clearfix">\n' +
                 '<img  src="/blankShop/img/product/icon.jpg"" width="100px" height="70px" alt="avatar" />\n' +
@@ -43,7 +97,6 @@ function connectToChat(userName) {
                 var cnt= $("#newMessage_"+data.fromLogin).html()
                 messagesStorage.set(data.fromLogin+"_"+(messagesStorage.size+1),data.message);
                
-                
                 newMessages.set(data.fromLogin, messagesStorage);
                 if(cnt==undefined){
                 $('#userNameAppender_' + data.fromLogin).append('&ensp;&ensp;<span id="newMessage_' + data.fromLogin + 
@@ -76,7 +129,7 @@ function sendMsg(from, text) {
     messagesStorage.set($('#selectedUserId').html()+"_"+(messagesStorage.size+1),"admin:"+text);
 
 
-    stompClient.send("/app/chat/" + selectedUser, {}, JSON.stringify({
+    AdminStompClient.send("/app/chat/" + selectedUser, {}, JSON.stringify({
         fromLogin: from,
         message: text
     }));
@@ -95,7 +148,7 @@ function registration() {
 
 function printMessage(userName){
 
-
+    
     for(let i =  1;i<=newMessages.get(userName).size;i++){
            
         if(newMessages.get(userName).get(userName+"_"+i)==undefined)
@@ -127,6 +180,11 @@ function printMessage(userName){
 
 
 function selectUser(userName) {
+   
+
+    parent.$("#msginf").html("")
+    parent.$("#circleOnline").remove();
+
     console.log("selecting users: " + userName);
     selectedUser = userName;
     let isNew = document.getElementById("newMessage_" + userName) !== null;
@@ -140,30 +198,11 @@ function selectUser(userName) {
         $chatHistoryList.html("")
         printMessage(userName)
     } 
-
+   
+    
 
     $('#selectedUserId').html('');
     $('#selectedUserId').append(userName);
 }
 
-function fetchAll() {
-    $.get(url + "/fetchAllUsers", function (response) {
-        let users = response;
-        response.splice($.inArray($('#userName').val(),response),1)
-        
-     
-        let usersTemplateHTML = "";
-        for (let i = 0; i < users.length; i++) {
-            usersTemplateHTML = usersTemplateHTML + '<a href="#" onclick="selectUser(\'' + users[i] + '\')"><li class="clearfix">\n' +
-                '                <img src="https://rtfm.co.ua/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" width="55px" height="55px" alt="avatar" />\n' +
-                '                <div class="about">\n' +
-                '                    <div id="userNameAppender_' + users[i] + '" class="name">' + users[i] + '</div>\n' +
-                '                    <div class="status">\n' +
-                '                        <i class="fa fa-circle offline"></i>\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
-                '            </li></a>';
-        }
-        $('#usersList').html(usersTemplateHTML);
-    });
-}
+

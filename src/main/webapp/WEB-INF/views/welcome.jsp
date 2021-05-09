@@ -28,6 +28,21 @@
 <link rel="stylesheet" href="/blankShop/assets/css/style.css">
 <!-- Modernizer JS -->
 <script src="/blankShop/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+<!--    libs for stomp and sockjs-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!--    end libs for stomp and sockjs-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+      type="text/css">
+<link href="/blankShop/css/backEnd/Userstyle.css" rel="stylesheet">
+
+
+
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -566,7 +581,7 @@
 					<div class="col-xl-5 col-lg-4 col-md-4">
 						<div class="single-feature mb-40 pl-50">
 							<div class="feature-icon">
-								<img src="/blankShop/assets/img/icon-img/support.png" alt="">
+								<img id="chatTo" src="/blankShop/assets/img/icon-img/support.png" alt="">
 							</div>
 							<div class="feature-content">
 								<h4>線上客服</h4>
@@ -765,7 +780,64 @@
 		<!-- Modal end -->
 	</div>
 
+    <input id="userName" placeholder="search" type="hidden" value="${name}"/>
+    <input id="memberId" placeholder="search" type="hidden" value="${memberId}"/>
+    <div id="message-dialog">
+ 
+    <div class="chat">
+        <!-- <div class="chat-header clearfix">
+    
+               <h1>即時客服</h1>
+     
+        </div>  -->
+        <div class="chat-history">
+            <ul>
 
+            </ul>
+
+        </div> <!-- end chat-history -->
+
+        <div class="chat-message clearfix">
+            <textarea id="message-to-send" name="message-to-send" placeholder="" rows="3"></textarea>
+
+          
+
+            <button id="sendBtn">送出</button>
+
+        </div> <!-- end chat-message -->
+
+    </div> <!-- end chat -->
+
+    </div>
+
+
+
+
+<!-- 通訊對話框 -->
+
+<script id="message-template" type="text/x-handlebars-template">
+    <li class="clearfix">
+        <div class="message-data align-right">
+            <span class="message-data-time">{{time}}, Today</span> &nbsp; &nbsp;
+            <span class="message-data-name">You</span> <i class="fa fa-circle me"></i>
+        </div>
+        <div class="message other-message float-right">
+            {{messageOutput}}
+        </div>
+    </li>
+</script>
+
+<script id="message-response-template" type="text/x-handlebars-template">
+    <li>
+        <div class="message-data">
+            <span class="message-data-name"><i class="fa fa-circle online"></i> {{userName}}</span>
+            <span class="message-data-time">{{time}}, Today</span>
+        </div>
+        <div class="message my-message">
+            {{response}}
+        </div>
+    </li>
+</script>
 
 
 	<!-- All JS is here
@@ -786,7 +858,67 @@
 	<script src="/blankShop/assets/js/main.js"></script>
 	<script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
 	<script src="/blankShop/assets/js/header.js"></script>
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
+    <script src="/blankShop/js/backEnd/memberChat/clientcustom.js"></script>
+    <script src="/blankShop/js/backEnd/memberChat/clientchat.js"></script>
+    
+    <script>
+        
+        // window.onload = function() {
+    
+            $(function(){
+                $("#chatTo").attr("class","");
+                registration();
+                selectUser("admin");
+    
+            })
+    
+                   
+    
+                     var chatroom
+    
+                    chatroom = $("#message-dialog").dialog({
+                    autoOpen: false,
+                    height: 820,
+                    width: 480,
+                    modal: false,
+                    resizable:true,
+                    title: "即時客服",
+                    position: { my: "right bottom", at: "right bottom", of: window  },
+                   
+                    close: function () {
+    
+                        
+                        chatroom.dialog("close");
+    
+                    }
+                    });    
+    
+    
+    
+                    $('#chatTo').button().on("click", function () {
+                        
+                        $("#message-dialog").css("visibility","visible")
+        
+    
+                        chatroom.dialog("open");
+                        chatroom.dialog( "option", "maxWidth", 900 );
+    
+                    }
+                
+                    
+                
+                    
+    
+                    )
+    
+    
+    
+    
+                    //   };
+    </script>
 
 </body>
 </html>
