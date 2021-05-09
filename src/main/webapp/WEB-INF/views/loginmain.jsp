@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="/blankShop/css/backEnd/login.css">
-<script type="text/javascript" src="/blankShop/js/backEnd/login.js"></script>
+<script  src="/blankShop/js/backEnd/login/login.js"></script>
+<script  src="/blankShop/js/backEnd/login/inputdata.js"></script>
 <title>BlankShop後台系統</title>
 </head>
 <body>
@@ -25,7 +26,11 @@
 			<input type="checkbox" onclick="myFunction()">顯示密碼
 			<p>${errormsg.msg}</p> 
 			<input type="submit" value="登入" class="submit-btn">
+			<input type="button" id="manager" value="主管">
+			<input type="button" id="employee" value="員工">
 		</form>
-	</div>
+	</div>	
+	
 </body>
+
 </html>

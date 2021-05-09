@@ -11,12 +11,10 @@ $(document).ready(function(){
             dataType:"text",
             success: function(data){
                 username=data;
-                if (username) {
-                    
+                if (username) {                   
                     const socket = new SockJS('/blankShop/chat')
                     stompClient3 = Stomp.over(socket)
                     stompClient3.connect({}, onConnected3)
-                   
                 }
             }
         })

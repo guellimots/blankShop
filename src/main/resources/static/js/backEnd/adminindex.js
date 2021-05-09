@@ -19,8 +19,10 @@ $(document).ready(function(){
                         type: "POST",
                         dataType: "json",
                         success: function(data) { 
-                           swal("新增成功","","success",{button:"確定"});
-                           createmsgDialog.dialog("close");            
+                           swal("新增成功","","success",{button:"確定"})
+                           createmsgDialog.dialog("close").then(function(){
+							parent.window.location.reload();
+						   });            
                     }
                 })
             },
