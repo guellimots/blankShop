@@ -224,7 +224,7 @@
 		</div>
 		<!-- my account wrapper start -->
 		<div class="my-account-wrapper pt-100 pb-100">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
 						<!-- My Account Page Start -->
@@ -317,10 +317,15 @@
 																type="text" id="address" name="address"
 																value="${Member.address}" />
 														</div>
+														<div class="row">
 														<div class="single-input-item">
-															<button id="btn1" type="submit" class="check-btn sqr-btn " >修改</button>
-															
+															<div class="col-12">
+															<button id="btn1" type="submit" class="check-btn sqr-btn " >修改</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+															<button id="btn2" type="button" class="check-btn sqr-btn " >我是一鍵輸入</button>
+															</div>
+														
 														</div>
+													</div>	
 													</form>
 													<div class="single-input-item">
 														<br>
@@ -550,6 +555,14 @@ $('#btn1').mousedown(function() {
 			swal("修改成功","","success",{button:'確定', timer: 2000});
 			setTimeout(function(){$('#send1').submit(); },2000);
 })
+
+  //一鍵輸入
+  $("#btn2").click(function () {
+                $("#address").val("106台北市大安區復興南路一段390號2樓");
+                $("#cellphone").val("0987654321");
+				$("#birthday").val(1994/2/17);
+               
+            });
 	</script>
 </body>
 

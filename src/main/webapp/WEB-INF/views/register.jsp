@@ -107,7 +107,7 @@
 												<h4>會員帳號</h4>
 												<ul>
 													<li><a href="/blankShop/frontEnd/tranToRegister">註冊</a></li>
-													<li><a href="#">登入</a></li>
+													<li><a href="/blankShop/frontEnd/loginPage">登入</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -422,10 +422,10 @@
             });
             
             $('#btn1').mousedown(function () {
-                
-               
+                var 
+              
                     
-                if ("fail" == "${alertmsg}") {
+                if ("fail" == "${alertmsg}"){
                     
                     swal("帳號已經註冊過", "", "error", { button: '確定', timer: 2000 });
                     setTimeout(function () { $('#send1').submit(); }, 2000);

@@ -313,7 +313,7 @@ button.big-button:active::before {
       <h1 class="h1">Success</h1>
       <p class="p">付款成功<br /><br>感謝您的支持及購買!</p>
       <br>
-      <button class="big-button" onclick="location.href='/blankShop/frontEnd/welcomePage'">回首頁</button>
+      <button class="big-button" onclick="location.href='/blankShop/frontEnd/showmem'">回首頁</button>
     </div>
     <!-- style="width: 20px ;height: 40px;" -->
   </div>

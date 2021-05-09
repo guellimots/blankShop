@@ -94,7 +94,9 @@ public class TransController {
 	}
 	//註冊頁面
 	@GetMapping("/tranToRegister")
-	public String register() {
+	public String register(Model m) {
+		m.addAttribute("alertmsg","cantUse");
+		m.addAttribute("firstTime","first");
 		return "register";
 	}
 

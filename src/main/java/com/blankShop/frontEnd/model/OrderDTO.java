@@ -55,12 +55,14 @@ public class OrderDTO {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public Date getCreateDate() {
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//		sdf.pcreateDate
-		return createDate;
+	public String getCreateDate() {
+		System.out.println(createDate+"++++++++++++++++++++++++++++");
+	 SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");                            
+	  String rightdate = sdFormat.format(createDate);
+		return rightdate;
 	}
 	public void setCreateDate(Date createDate) {
+		
 		this.createDate = createDate;
 	}
 	public Integer getPrice() {

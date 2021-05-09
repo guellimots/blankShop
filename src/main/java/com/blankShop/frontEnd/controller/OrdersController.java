@@ -87,7 +87,7 @@ public class OrdersController {
 		m.addAttribute("stAddr",stAddr);
 		m.addAttribute("stTel",stTel);
 		//m.addAttribute("id", memberId);
-		return "my-account";
+		return "checkout";
 	}
 
 }
