@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  scan="true" scanPeriod="10 seconds" debug="false">
+    <!-- 紀錄檔級別從低到高分為TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果設定為WARN，則低於WARN的資訊都不會輸出 -->
+    <!-- scan:當此屬性設定為true時，組態檔如果發生改變，將會被重新載入，預設值為true -->
+    <!-- scanPeriod:設定監測組態檔是否有修改的時間間隔，如果沒有給出時間單位，預設單位是毫秒。當scan為true時，此屬性生效。預設的時間間隔為1分鐘。 -->
+    <!-- debug:當此屬性設定為true時，將列印出logback內部紀錄檔資訊，實時檢視logback執行狀態。預設值為false。 -->
+    <contextName>logback</contextName>
+    <!-- name的值是變數的名稱，value的值時變數定義的值。通過定義的值會被插入到logger上下文中。定義變數後，可以使「${}」來使用變數。 -->
+    <property name="log.path" value="log" />
+    <property name="console_log_pattern"
+              value="%black(%contextName-) %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger{36}) - %gray(%msg%n)"/>
+    <property name="charset" value="UTF-8"/>
+    <!--輸出到控制檯-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--此紀錄檔appender是為開發使用，只設定最底級別，控制檯輸出的紀錄檔級別是大於或等於此級別的紀錄檔資訊-->
+        <!-- 例如：如果此處設定了INFO級別，則後面其他位置即使設定了DEBUG級別的紀錄檔，也不會被輸出 -->
+         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+             <level>DEBUG</level>
+         </filter>
+        <encoder>
+            <pattern>${console_log_pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--輸出到檔案,只記錄INFO級別資訊-->
+    <appender name="info_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/roll_info/logback.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${console_log_pattern}</pattern>
+            <charset>${charset}</charset>
+        </encoder>
+        <!-- 紀錄檔記錄器的捲動策略，按日期，按大小記錄 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天紀錄檔歸檔路徑以及格式 -->
+            <fileNamePattern>${log.path}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--紀錄檔檔案保留天數-->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <!-- 如果超過10MB就刪除 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+        <!-- 此紀錄檔檔案只記錄info級別的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!--輸出到檔案,只記錄WARN級別資訊-->
+    <appender name="warn_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    </appender>
+    <!--輸出到檔案,只記錄ERROR級別資訊-->
+    <appender name="error_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    </appender>
+
+    <!--
+    root節點是必選節點，用來指定最基礎的紀錄檔輸出級別，只有一個level屬性
+    level:用來設定列印級別，大小寫無關：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，預設是DEBUG
+    可以包含零個或多個appender元素。
+    -->
+    <root level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="info_file" />
+        <appender-ref ref="warn_file"/>
+        <appender-ref ref="error_file"/>
+    </root>
+
+    <!--
+        <logger>用來設定某一個包或者具體的某一個類的紀錄檔列印級別、以及指定<appender>。
+        <logger>僅有一個name屬性，
+        一個可選的level和一個可選的additivity屬性。
+        name:用來指定受此logger約束的某一個包或者具體的某一個類。
+        level:用來設定列印級別，大小寫無關：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，
+              如果未設定此屬性，那麼當前logger將會繼承上級的級別。
+        additivity:是否向上級logger傳遞列印資訊,預設是true
+    -->
+    <!-- 使用mybatis的時候，sql語句是debug下才會列印，而這裡我們只設定了info，所以想要檢視sql語句的話，有以下兩種操作：
+         第一種把<root level="INFO">改成<root level="DEBUG">這樣就會列印sql，不過這樣紀錄檔那邊會出現很多其他訊息
+         第二種就是單獨給mapper下目錄設定DEBUG模式，程式碼如下，這樣設定sql語句會列印，其他還是正常DEBUG級別：
+    -->
+    <logger name="com.hyh.logback.web.LogTestController" level="WARN" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="warn_file"/>
+        <appender-ref ref="error_file"/>
+    </logger>
+
+    <!--    如果多環境開發可以用springProfile -->
+    <!--開發環境:列印控制檯-->
+    <springProfile name="dev">
+        <!--可以輸出專案中的debug紀錄檔，包括mybatis的sql紀錄檔-->
+        <logger name="com.hyh.logback.web" level="DEBUG">
+            <appender-ref ref="console"/>
+        </logger>
+        <!--
+            root節點是必選節點，用來指定最基礎的紀錄檔輸出級別，只有一個level屬性
+            level:用來設定列印級別，大小寫無關：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，預設是DEBUG
+            可以包含零個或多個appender元素。
+        -->
+        <root level="INFO">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+</configuration>
