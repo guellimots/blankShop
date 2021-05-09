@@ -64,6 +64,10 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return product;
 	}
+	
+	public List<Product> findByProductIDAndColorCode(Integer productID, String colorCode){
+		return productDao.findByProductIDAndColorCode(productID, colorCode);
+	}
 
 	
 

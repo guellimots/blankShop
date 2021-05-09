@@ -303,18 +303,111 @@ public class frontEndController {
 		m.addAttribute("result", result);
 		return result;	
 	}
+	
 	@GetMapping("/products/orderByDate")
 	@ResponseBody
 	public ArrayList<Product> orderByDate(@ModelAttribute("result") ArrayList<Product> result){
 		Collections.sort(result, new dateComparator());		
 		return result;		
 	}
+	
 	@GetMapping("/products/orderByPrice")
 	@ResponseBody
 	public ArrayList<Product> orderByPrice(@ModelAttribute("result") ArrayList<Product> result){  
 	   Collections.sort(result, new priceComparator());
 	   return result;
 	}
+	
+	
+	@PostMapping("/products/pageFilter")
+	public @ResponseBody ArrayList<Product> pageFilter(@RequestBody HashMap<String, String> filterRequest, @ModelAttribute("result") ArrayList<Product> result){
+		
+
+		ArrayList<String> genreList=new ArrayList<String>();
+		ArrayList<String> purposeList=new ArrayList<String>();
+		ArrayList<Product> filterResult1=new ArrayList<Product>();
+		ArrayList<Product> filterResult2=new ArrayList<Product>();
+		ArrayList<Product> filterResult3=new ArrayList<Product>();
+		
+		Integer minPrice=0;
+		Integer maxPrice=0;
+		
+		if(filterRequest.get("tops").equals("0")&&filterRequest.get("shirts").equals("0")&&filterRequest.get("trousers").equals("0")&&filterRequest.get("dresses").equals("0")) {
+			filterRequest.put("tops", "1");
+			filterRequest.put("shirts", "1");
+			filterRequest.put("trousers", "1");
+			filterRequest.put("dresses", "1");
+		}
+		
+		if(filterRequest.get("leisure").equals("0")&&filterRequest.get("date").equals("0")&&filterRequest.get("workPlace").equals("0")) {
+			filterRequest.put("leisure", "1");
+			filterRequest.put("date", "1");
+			filterRequest.put("workPlace", "1");
+		}
+		
+		if (filterRequest.get("tops").equals("1")) {
+			genreList.add("上衣");
+		}
+		if (filterRequest.get("shirts").equals("1")) {
+			genreList.add("襯衫");
+		}
+		if (filterRequest.get("trousers").equals("1")) {
+			genreList.add("褲裝");
+		}
+		if (filterRequest.get("dresses").equals("1")) {
+			genreList.add("裙裝");
+		}
+		
+		if(filterRequest.get("leisure").equals("1")) {
+			purposeList.add("居家休閒");
+		}
+		
+		if(filterRequest.get("date").equals("1")) {
+			purposeList.add("約會必勝");
+		}
+		
+		if(filterRequest.get("workPlace").equals("1")) {
+			purposeList.add("職場穿搭");
+		}
+		
+		
+		for(Product product:result) {
+				if(genreList.indexOf(product.getGenre())!=-1) {
+					filterResult1.add(product);
+				}
+		}
+		
+		for(Product product:filterResult1) {
+				if(purposeList.indexOf(product.getPurpose())!=-1) {
+					filterResult2.add(product);
+			}
+		}
+		
+		if ((filterRequest.get("minPrice").equals("0"))&&(filterRequest.get("maxPrice").equals("0"))){
+			minPrice=100;
+			maxPrice=10000;
+
+		}
+		else {
+			minPrice=Integer.parseInt(filterRequest.get("minPrice"));
+			maxPrice=Integer.parseInt(filterRequest.get("maxPrice"));
+		}
+		
+		for (Product product:filterResult2) {
+			if(product.getSalePrice()==0) {
+				product.setSalePrice(product.getProductPrice());
+			}
+			
+			Integer price=product.getSalePrice();
+			if ((price<=maxPrice)&&(price>=minPrice)) {
+				filterResult3.add(product);
+			}
+		}
+		
+		
+		return filterResult3;
+	}
+	
 	@GetMapping("/product/{productID}")
 	public String loadProductPage(@PathVariable Integer productID, Model m) {
 		List<Product> products=pdService.findByProductID(productID);
@@ -344,6 +437,8 @@ public class frontEndController {
 		m.addAttribute("colorList",colorList);
 		return "product";
 	}
+	
+	
 	@PostMapping("/product/checkStock")
 	public @ResponseBody HashMap<String, String> checkStock(@RequestBody HashMap<String, String> cartRequest){
 		
@@ -363,6 +458,7 @@ public class frontEndController {
 		
 		return stockMsg;
 	}
+	
 	@PostMapping("/product/placeInCart")
 	public @ResponseBody HashMap<String, String> placeInCart(@RequestBody HashMap<String, String> cartRequest, HttpSession session){
 		
@@ -394,6 +490,27 @@ public class frontEndController {
 		
 		return cartInfo;
 	}
+	
+	@PostMapping("/product/productImg")
+	public @ResponseBody HashMap<String, String> getProductImg(@RequestBody HashMap<String, String> imgRequest){
+		
+		HashMap<String, String> imgList=new HashMap<String, String>();
+		
+		Integer productID=Integer.parseInt(imgRequest.get("productID"));
+	    String colorCode=imgRequest.get("colorCode");
+		
+		List<Product> products=pdService.findByProductIDAndColorCode(productID, colorCode);
+		
+		for(int i=0; i<products.size();i++) {
+				imgList.put(String.valueOf(3*i+1), products.get(i).getProductImgDir1());
+				imgList.put(String.valueOf(3*i+2), products.get(i).getProductImgDir2());
+				imgList.put(String.valueOf(3*i+3), products.get(i).getProductImgDir3());
+		}
+		
+		return imgList;
+		
+	}
+	
 	@GetMapping("/orders")
 	public @ResponseBody List<OrderDTO> getOrderByOrderId(Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");

@@ -23,5 +23,7 @@ Product findTypeId(Integer typeId);
 	List<Integer> bestsellers();
 	
 	Product findByProductIDAndColorCodeAndSize(Integer productID, String colorCode, String size);
+	
+	List<Product> findByProductIDAndColorCode(Integer productID, String colorCode);
 
 }

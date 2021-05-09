@@ -93,49 +93,19 @@
 									<button class="icon-cart-active">
 										<span class="icon-cart"> <i class="sli sli-bag"></i> <span
 											class="count-style"></span>
-										</span> <span class="cart-price"></span>
+										</span> $<span class="cart-price" id=crartTotalPrice></span>
 									</button>
-									<div class="shopping-cart-content">
+									<div class="shopping-cart-content" id="cartContent">
 										<div class="shopping-cart-top">
 											<h4>購物車</h4>
 											<a class="cart-close" href="#"><i class="sli sli-close"></i></a>
 										</div>
-										<ul height="350px">
-											<li class="single-shopping-cart">
-												<div class="shopping-cart-img">
-													<a href="#"><img alt=""
-														src="/blankShop/assets/img/cart/cart-1.svg"></a>
-													<div class="item-close">
-														<a href="#"><i class="sli sli-close"></i></a>
-													</div>
-												</div>
-												<div class="shopping-cart-title">
-													<h4>
-														<a href="#">Product Name </a>
-													</h4>
-													<span>1 x 90.00</span>
-												</div>
-											</li>
-											<li class="single-shopping-cart">
-												<div class="shopping-cart-img">
-													<a href="#"><img alt=""
-														src="/blankShop/assets/img/cart/cart-2.svg"></a>
-													<div class="item-close">
-														<a href="#"><i class="sli sli-close"></i></a>
-													</div>
-												</div>
-												<div class="shopping-cart-title">
-													<h4>
-														<a href="#">Product Name</a>
-													</h4>
-													<span>1 x 90.00</span>
-												</div>
-											</li>
+										<ul id="cart1" style="height: 350px;">
 										</ul>
 										<div class="shopping-cart-bottom">
 											<div class="shopping-cart-total">
 												<h4>
-													總計 : <span class="shop-total">NT$ 260</span>
+													總計 : $<span class="shop-total" id="subtotal"></span>
 												</h4>
 											</div>
 											<div class="shopping-cart-btn btn-hover text-center">
@@ -360,32 +330,32 @@
 							<br>
 							<h4 class="pro-sidebar-title">頁面結果篩選</h4>
 							<hr>
-							
+							    <form action="#" id="filterForm" method="post">
 								<div class="sidebar-widget">
 									<h4 class="pro-sidebar-title">商品種類</h4>
 									<div class="sidebar-widget-list mt-30">
-										<ul>
+										<ul id="genreFilter">
 											<li>
 												<div class="sidebar-widget-list-left">
-													<input type="checkbox" value="上衣"><a href="javascript:;">上衣</a>
+													<input type="checkbox" value="tops"><a href="javascript:;">上衣</a>
 													<span class="checkmark"></span>
 												</div>
 											</li>
 											<li>
 												<div class="sidebar-widget-list-left">
-													<input type="checkbox" value="襯衫"><a href="javascript:;">襯衫</a>
+													<input type="checkbox" value="shirts"><a href="javascript:;">襯衫</a>
 													<span class="checkmark"></span>
 												</div>
 											</li>
 											<li>
 												<div class="sidebar-widget-list-left">
-													<input type="checkbox" value="褲裝"><a href="javascript:;">褲裝</a>
+													<input type="checkbox" value="trousers"><a href="javascript:;">褲裝</a>
 													<span class="checkmark"></span>
 												</div>
 											</li>
 											<li>
 												<div class="sidebar-widget-list-left">
-													<input type="checkbox" value="裙裝"><a href="javascript:;">裙裝</a>
+													<input type="checkbox" value="dresses"><a href="javascript:;">裙裝</a>
 													<span class="checkmark"></span>
 												</div>
 											</li>
@@ -395,7 +365,7 @@
 								<div class="sidebar-widget mt-45">
 									<h4 class="pro-sidebar-title">價格篩選</h4>
 									<div class="price-filter mt-10">
-										<div class="price-slider-amount">
+										<div class="price-slider-amount" id="priceFilter">
 											<input type="text" id="amount" name="price"
 												placeholder="請選取價格範圍" />
 										</div>
@@ -405,22 +375,22 @@
 								<div class="sidebar-widget mt-50">
 									<h4 class="pro-sidebar-title">商品用途</h4>
 									<div class="sidebar-widget-list mt-20">
-										<ul>
+										<ul id="purposeFilter">
 											<li>
 												<div class="sidebar-widget-list-left">
-													<input type="checkbox" value="居家休閒"> <a href="javascript:;">居家休閒</a>
+													<input type="checkbox" value="leisure"> <a href="javascript:;">居家休閒</a>
 													<span class="checkmark"></span>
 												</div>
 											</li>
 											<li>
 												<div class="sidebar-widget-list-left">
-													<input type="checkbox" value="約會必勝"> <a href="javascript:;">約會必勝</a>
+													<input type="checkbox" value="date"> <a href="javascript:;">約會必勝</a>
 													<span class="checkmark"></span>
 												</div>
 											</li>
 											<li>
 												<div class="sidebar-widget-list-left">
-													<input type="checkbox" value="職場穿搭"> <a href="javascript:;">職場穿搭</a>
+													<input type="checkbox" value="workPlace"> <a href="javascript:;">職場穿搭</a>
 													<span class="checkmark"></span>
 												</div>
 											</li>
@@ -430,8 +400,9 @@
 								
 								<br>
 
-								<input class="filter-btn" type="submit" value="送出">&nbsp
+								<input id="filterSubmit-btn" class="filter-btn" type="submit" value="送出">&nbsp
 								<input class="filter-btn" type="reset" value="清除">
+								</form>
 							
 
 						</div>
@@ -623,6 +594,7 @@
 ============================================ -->
 
 	<!-- jQuery JS -->
+	
 	<script src="/blankShop/assets/js/vendor/jquery-1.12.4.min.js"></script>
 	<!-- Popper JS -->
 	<script src="/blankShop/assets/js/popper.min.js"></script>
@@ -637,6 +609,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
 	<script src="/blankShop/assets/js/main.js"></script>
 	<script src="/blankShop/assets/js/header.js"></script>
+	<script src="/blankShop/assets/js/filter.js"></script>
+	<script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
 	
 	<script>
 	
