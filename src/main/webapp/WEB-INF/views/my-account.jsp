@@ -129,7 +129,7 @@
 												<h4>會員帳號</h4>
 												<ul>
 													<li><a href="/blankShop/frontEnd/showmem">會員中心</a></li>
-													<li><a href="#" id="logout-btn">登出</a></li>
+													<li><a href="logOut" id="logout-btn">登出</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -247,7 +247,7 @@
 										<div class="tab-pane fade" id="orders" role="tabpanel">
 											<div class="myaccount-content">
 												<h3>歷史訂單</h3>
-												<div class="myaccount-table table-responsive text-center" >
+												<div class="myaccount-table table-responsive text-center">
 													
 													<table class="dataTable display cell-border hover"
 														id="orderTable" >
@@ -257,6 +257,7 @@
 																<th>產品名稱</th>
 																<th>金額</th>
 																<th>數量</th>
+																<th>運送地址</th>
 																<th>訂單狀態</th>
 																<th>建立日期</th>
 															</tr>
@@ -427,6 +428,13 @@
 				"rowId":"orderIdentity",
 				"autowidth": true,
 				"order" : [ [ 3, "desc" ] ],
+				// "columnDefs": [
+				// 			{ targets: 5,
+				// 			render: function(data) {
+				// 				return "<time datetime=>"+data+"</time>"
+				// 				}
+				// 			}   
+				// 		],
 				
 				"aoColumns" : [ {
 					"mData" : "orderId"
@@ -436,10 +444,12 @@
 					"mData" : "price"
 				}, {
 					"mData" : "amount"
+				},{
+					"mData" : "address"
 				}, {
 					"mData" : "orderStatus"
 				}, {
-					"mData" : "createDate"
+					"mData" : "createDate", 
 				}, ]
 			});
 	

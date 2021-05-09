@@ -522,22 +522,25 @@ public class frontEndController {
 	public String insertMember(@RequestParam(name = "user-name") String memberName,
 			@RequestParam(name = "user-email") String email, @RequestParam(name = "user-password") String password,
 			Member mb, Model model) {
+		String result= "";
 		System.out.println(email);
 		// System.out.println(memberService.checkMemberbyEmail(email));
 		// 判斷email是否有註冊過
 		if (memberService.checkMemberbyEmail(email)) {
-			String result = "good";
+			 result = "fail";
 			model.addAttribute("alertmsg", result);
 //			Map<String, String> errormsg = new HashMap<String, String>();
 //			errormsg.put("msg", "此信箱已經註冊過、請重新輸入");
 //			model.addAttribute("errormsg", errormsg);
 			return "register";
 		} else {
+			result="good";
+			model.addAttribute("alertmsg",result);
 			mb.setMemberName(memberName);
 			mb.setEmail(email);
 			mb.setPassword(password);
 			memberService.save(mb);
-			return "index";
+			return "redirect:/frontEnd/loginPage";
 		}
 	}
 

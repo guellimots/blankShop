@@ -145,7 +145,7 @@
                         <div class="row align-items-center">
                             <div class="col-6">
                                 <div class="mobile-logo">
-                                    <a href="index.html"> <img alt=""
+                                    <a href="/blankShop/"> <img alt=""
                                         src="/blankShop/assets/img/logo/logo.png" width="100px">
                                     </a>
                                 </div>
@@ -196,7 +196,7 @@
                                                     </h4>
                                                 </div>
                                                 <div class="shopping-cart-btn btn-hover text-center">
-                                                     <a	class="default-btn" href="cart-page.html">檢視購物車</a>
+                                                     <a	class="default-btn" href="#">檢視購物車</a>
                                                 </div>
                                             </div>
                                         </div>
