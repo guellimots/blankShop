@@ -1,6 +1,9 @@
 package com.blankShop.frontEnd.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +26,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -61,6 +67,8 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 @SessionAttributes({ "alertmsg","result" })
 @RequestMapping("/frontEnd")
 public class frontEndController {
+	
+	String noImage = "classpath:static/img/frontEnd/NoImage1.jpg";
 	@Autowired
 	MemberService memberService;
 
@@ -72,6 +80,9 @@ public class frontEndController {
 
 	@Autowired
 	ProductService pdService;
+	
+	@Autowired
+	ResourceLoader resourceLoader;
 	
 	@GetMapping("/test")
 	public String test() {
@@ -521,23 +532,46 @@ public class frontEndController {
 	@PostMapping("/register")
 	public String insertMember(@RequestParam(name = "user-name") String memberName,
 			@RequestParam(name = "user-email") String email, @RequestParam(name = "user-password") String password,
-			Member mb, Model model) {
+			Member mb, Model model ) throws IOException {
+		String result11= "";
 		System.out.println(email);
-		// System.out.println(memberService.checkMemberbyEmail(email));
+		
 		// 判斷email是否有註冊過
 		if (memberService.checkMemberbyEmail(email)) {
-			String result = "good";
-			model.addAttribute("alertmsg", result);
+			 result11 = "fail";
+			model.addAttribute("alertmsg", result11);
 //			Map<String, String> errormsg = new HashMap<String, String>();
 //			errormsg.put("msg", "此信箱已經註冊過、請重新輸入");
 //			model.addAttribute("errormsg", errormsg);
-			return "register";
+			return "redirect:/frontEnd/tranToRegister";
 		} else {
+				//上傳預設圖片
+				byte[] originalImgByte=null;						
+				BufferedImage bufferedImage;
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+				try {
+					
+					Resource resource = resourceLoader.getResource(noImage); 	
+					File file = resource.getFile();
+					bufferedImage = ImageIO.read(file);
+					ImageIO.write(bufferedImage, "jpg", baos);
+					baos.flush();
+					originalImgByte = baos.toByteArray();
+					baos.close();
+					mb.setProfileImg(originalImgByte);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			result11="good";
+			model.addAttribute("alertmsg",result11);
 			mb.setMemberName(memberName);
 			mb.setEmail(email);
 			mb.setPassword(password);
+		
 			memberService.save(mb);
-			return "index";
+			return "redirect:/frontEnd/loginPage";
 		}
 	}
 

@@ -34,6 +34,7 @@ public class OrdersServiceImpl implements OrderService {
 			dto.setCreateDate(od.get(i).getCreateDate());
 			dto.setOrderStatus(od.get(i).getOrderStatus());
 			dto.setImgpath(od.get(i).getProduct().getProductImgDir1());
+			dto.setAddress(od.get(i).getAddress());
 			dtos.add(dto);
 			System.out.println(dtos);
 		}

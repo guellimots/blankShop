@@ -129,7 +129,7 @@
 												<h4>會員帳號</h4>
 												<ul>
 													<li><a href="/blankShop/frontEnd/showmem">會員中心</a></li>
-													<li><a href="#" id="logout-btn">登出</a></li>
+													<li><a href="logOut" id="logout-btn">登出</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -224,7 +224,7 @@
 		</div>
 		<!-- my account wrapper start -->
 		<div class="my-account-wrapper pt-100 pb-100">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
 						<!-- My Account Page Start -->
@@ -247,7 +247,7 @@
 										<div class="tab-pane fade" id="orders" role="tabpanel">
 											<div class="myaccount-content">
 												<h3>歷史訂單</h3>
-												<div class="myaccount-table table-responsive text-center" >
+												<div class="myaccount-table table-responsive text-center">
 													
 													<table class="dataTable display cell-border hover"
 														id="orderTable" >
@@ -257,6 +257,7 @@
 																<th>產品名稱</th>
 																<th>金額</th>
 																<th>數量</th>
+																<th>運送地址</th>
 																<th>訂單狀態</th>
 																<th>建立日期</th>
 															</tr>
@@ -316,10 +317,15 @@
 																type="text" id="address" name="address"
 																value="${Member.address}" />
 														</div>
+														<div class="row">
 														<div class="single-input-item">
-															<button id="btn1" type="submit" class="check-btn sqr-btn " >修改</button>
-															
+															<div class="col-12">
+															<button id="btn1" type="submit" class="check-btn sqr-btn " >修改</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+															<button id="btn2" type="button" class="check-btn sqr-btn " >我是一鍵輸入</button>
+															</div>
+														
 														</div>
+													</div>	
 													</form>
 													<div class="single-input-item">
 														<br>
@@ -427,6 +433,13 @@
 				"rowId":"orderIdentity",
 				"autowidth": true,
 				"order" : [ [ 3, "desc" ] ],
+				// "columnDefs": [
+				// 			{ targets: 5,
+				// 			render: function(data) {
+				// 				return "<time datetime=>"+data+"</time>"
+				// 				}
+				// 			}   
+				// 		],
 				
 				"aoColumns" : [ {
 					"mData" : "orderId"
@@ -436,10 +449,12 @@
 					"mData" : "price"
 				}, {
 					"mData" : "amount"
+				},{
+					"mData" : "address"
 				}, {
 					"mData" : "orderStatus"
 				}, {
-					"mData" : "createDate"
+					"mData" : "createDate", 
 				}, ]
 			});
 	
@@ -540,6 +555,14 @@ $('#btn1').mousedown(function() {
 			swal("修改成功","","success",{button:'確定', timer: 2000});
 			setTimeout(function(){$('#send1').submit(); },2000);
 })
+
+  //一鍵輸入
+  $("#btn2").click(function () {
+                $("#address").val("106台北市大安區復興南路一段390號2樓");
+                $("#cellphone").val("0987654321");
+				$("#birthday").val(1994/2/17);
+               
+            });
 	</script>
 </body>
 

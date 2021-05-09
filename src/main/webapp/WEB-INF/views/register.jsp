@@ -107,7 +107,7 @@
 												<h4>會員帳號</h4>
 												<ul>
 													<li><a href="/blankShop/frontEnd/tranToRegister">註冊</a></li>
-													<li><a href="#">登入</a></li>
+													<li><a href="/blankShop/frontEnd/loginPage">登入</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -227,7 +227,7 @@
                     <div class="breadcrumb-content text-center">
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li class="active">login / register</li>
+                            <li class="active">註冊</li>
                         </ul>
                     </div>
                 </div>
@@ -248,19 +248,20 @@
                                         <div class="login-form-container">
                                             <div class="login-register-form">
                                                 <form action="register" method="post" id="send1">
+                                                    <input class="col-6" id="user-email" name="user-email"
+                                                        placeholder="Email" type="text" onblur=checkEmail()>
+                                                    <span id="verifyEmailResult"></span>
+                                                    <span style="color:red">${errormsg.msg}</span>
+                                                    <P>1.不可空白 2. 須符合email格式</P>
                                                     <input class="col-6" type="text" id="user-name" name="user-name"
-                                                        placeholder="Username" onblur=checkName()><span
+                                                        placeholder="name" onblur=checkName()><span
                                                         id="verifyNameResult"></span>
                                                     <P>1.不可空白 2.至少兩個字以上 3.必須全部為中文字</P>
                                                     <input class="col-6" id="password" type="password"
                                                         name="user-password" placeholder="Password"
                                                         onblur=checkPassword()> <span id="verifyPasswordResult"></span>
                                                     <P>1.不可空白 2.至少6個字且必須包含英文字母、數字、特殊字元(!@#$%^&*)</P>
-                                                    <input class="col-6" id="user-email" name="user-email"
-                                                        placeholder="Email" type="text" onblur=checkEmail()>
-                                                    <span id="verifyEmailResult"></span>
-                                                    <span style="color:red">${errormsg.msg}</span>
-                                                    <P>1.不可空白 2. 須符合email格式</P>
+                                                    <span>"${alertmsg}"</span>
 
                                                     <div class="button-box">
                                                         <button id="btn1" type="submit">註冊</button>
@@ -322,6 +323,7 @@
     </div>
         <!-- All JS is here -->
         <script>
+             
             function checkName() {
 
                 let nameValue = document.getElementById("user-name").value;
@@ -418,16 +420,23 @@
                 $("#user-email").val("123@gmail.com");
 
             });
-
+            
             $('#btn1').mousedown(function () {
-                var abc = "${alertmsg}"
-                if (abc == "good") {
-                   
+                var 
+              
+                    
+                if ("fail" == "${alertmsg}"){
+                    
                     swal("帳號已經註冊過", "", "error", { button: '確定', timer: 2000 });
                     setTimeout(function () { $('#send1').submit(); }, 2000);
 
-                    abc == "";
-
+                    abc = "";
+                }
+                if ("good"=="${alertmsg}")
+                    {
+                    swal("註冊成功", "", "success", { button: '確定', timer: 2000 });
+                    setTimeout(function () { $('#send1').submit(); }, 2000);
+                    abc = "";
                 }
 
 

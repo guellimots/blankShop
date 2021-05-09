@@ -1,5 +1,6 @@
 package com.blankShop.frontEnd.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OrderDTO {
@@ -15,6 +16,7 @@ public class OrderDTO {
 	private String paymentId;
 	private String ezAdd;
 	private String ezName;
+	private String address;
 
 	public String getEzAdd() {
 		return ezAdd;
@@ -53,10 +55,14 @@ public class OrderDTO {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public Date getCreateDate() {
-		return createDate;
+	public String getCreateDate() {
+		System.out.println(createDate+"++++++++++++++++++++++++++++");
+	 SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");                            
+	  String rightdate = sdFormat.format(createDate);
+		return rightdate;
 	}
 	public void setCreateDate(Date createDate) {
+		
 		this.createDate = createDate;
 	}
 	public Integer getPrice() {
@@ -88,6 +94,12 @@ public class OrderDTO {
 	}
 	public void setPaymentId(String paymentId) {
 		this.paymentId = paymentId;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }
