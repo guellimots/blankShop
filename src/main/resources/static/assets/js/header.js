@@ -17,25 +17,7 @@ function logOut() {
 var logOutBtn = document.getElementById("logout-btn");
 logOutBtn.addEventListener("click", logOut);
 
-
-if(localStorage.getItem('cartItems')==null){
-	$(".count-style").css('visibility','hidden');
-	$(".cart-price").html('0');
-}
-else{
-    var cartItems=JSON.parse(localStorage.getItem('cartItems'));
-	var amount=0;
-	var total=0;
-	for (var i=0; i<cartItems.length; i++){
-		amount+=parseInt(cartItems[i].amount);
-		total+=parseInt(cartItems[i].price)*parseInt(cartItems[i].amount);
-	}
-	
-	$(".count-style").css('visibility','visible');
-	$(".count-style").html(amount.toString());
-	$(".cart-price").html(total.toString());
-}
-
+$(".count-style").css('visibility','hidden');
 
 
 $(document).ready(function(){

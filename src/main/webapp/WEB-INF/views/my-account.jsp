@@ -396,9 +396,7 @@
 
 	<!-- All JS is here
 ============================================ -->
-
-	<script src="/blankShop/assets/js/header.js"></script>
-    <script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
+	<script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
 	<!-- jQuery JS -->
 	<!-- 	<script src="/blankShop/assets/js/vendor/jquery-1.12.4.min.js"></script> -->
 	<!-- Popper JS -->

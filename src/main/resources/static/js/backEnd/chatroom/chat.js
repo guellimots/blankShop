@@ -5,6 +5,7 @@ $(document).ready(function(){
 
 
     getuser()
+    
     function getuser(){
         $.ajax({
             url:"/blankShop/backEnd/getEmpname",
@@ -22,8 +23,6 @@ $(document).ready(function(){
             }
         })
     }
-
-
     
     //判斷是否連線成功
     const onConnected2 = () => {
@@ -31,8 +30,7 @@ $(document).ready(function(){
         stompClient2.send("/app/chat.newUser",
             {},
             JSON.stringify({sender: username, type: 'CONNECT'})
-        )
-        
+        )  
     }
     
     //連線失敗，顯示錯誤訊息
@@ -55,6 +53,7 @@ $(document).ready(function(){
                 type: 'CHAT',
                 time: moment().calendar()
             }
+            
             stompClient2.send("/app/chat.send", {}, JSON.stringify(chatMessage))
             messageInput.value = ''
         }
@@ -127,7 +126,7 @@ $(document).ready(function(){
             const avatarContainer = document.createElement('div')
             avatarContainer.className = 'img_cont_msg'
 
-
+            
             //顯示人頭(待調整左右輸出-判斷方式username比對message.sender，若不同顯示左邊)
             getempphotot()
             function getempphotot(){
@@ -172,28 +171,11 @@ $(document).ready(function(){
         messageElement2.innerHTML = message.time
         messageElement3.innerHTML = message.sender.add = message.sender
         
-        if(message.content != message.sender+" 上線"){
-            changecolor()
-        }
-
-        // const person = document.querySelector('#person')
         
-        // if(username != message.sender){
-        //     person.appendChild(flexBox3)
-        // }
-        // person.scrollTop = person.scrollHeight
-        
-        const chat = document.querySelector('#chat')
-        chat.appendChild(flexBox)  
+        chat.appendChild(flexBox)
         chat.appendChild(flexBox2)
         chat.scrollTop = chat.scrollHeight      
-       
-    }
 
-
-
-    function changecolor(){
-        $("#group").css('background-color','#98F898')
     }
 
     

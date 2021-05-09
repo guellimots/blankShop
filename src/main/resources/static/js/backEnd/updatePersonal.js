@@ -7,7 +7,6 @@
 	$("#but01").mousedown(function(){
 		
 	var frm = document.forms["form1"];
-// function submitTest() {
 
 	  document.getElementById("verifyMobileResult").innerHTML ="";
 	  document.getElementById("verifyAddressResult").innerHTML ="";
@@ -56,6 +55,7 @@ function checkAddress() {
 			alert("地址空白無效!!")
 		    return false;
 		}
+		
 		else {
 			if (!result) {
 				resultSpan.style.color = "green";

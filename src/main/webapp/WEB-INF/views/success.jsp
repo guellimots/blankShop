@@ -24,8 +24,6 @@
 <link rel="stylesheet" href="/blankShop/assets/css/style.css">
 <!-- Modernizer JS -->
 <script src="/blankShop/assets/js/vendor/modernizr-2.8.3.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <style>
     .body {
@@ -380,7 +378,7 @@ button.big-button:active::before {
 
     	<!-- jQuery JS -->
 	<script src="/blankShop/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
+  <script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
 	<!-- Popper JS -->
 	<script src="/blankShop/assets/js/popper.min.js"></script>
 	<!-- Bootstrap JS -->

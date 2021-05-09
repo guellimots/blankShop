@@ -62,11 +62,11 @@
 				<!-- 即時通訊息功能-->
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href=""> 
-					<i class="far fa-comments"></i>
+					<i class="fa fa-comments" id="comments"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<a href="/blankShop/backEnd/adminChatRoomView" class="dropdown-item" ><span class="fa fa-user-circle">  客人聯繫</span></a>
-						<a href="/blankShop/backEnd/adminChatRoom" class="dropdown-item" id="group"><span class="fa fa-users">  員工群組</span></a>
+						<a href="/blankShop/backEnd/adminChatRoomView" class="dropdown-item" ><span class="fa fa-user-circle" id="userone">  客人聯繫</span></a>
+						<a href="/blankShop/backEnd/adminChatRoom" class="dropdown-item" id="group"><span class="fa fa-users" id="usergroup">  員工群組</span></a>
 					</div>
 					
 				<!-- 警示通訊息功能-->
@@ -339,7 +339,7 @@
 	<!-- jQuery UI 1.11.4 -->
 	<script src="/blankShop/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-	<script src="/blankShop/js/backEnd/chatroom/chat.js"></script>
+	<script src="/blankShop/js/backEnd/chatroom/checkmessage.js"></script>
 	<script>
 		$.widget.bridge('uibutton', $.ui.button)
 	</script>

@@ -30,8 +30,6 @@ public interface ProductsRepository  extends JpaRepository<Product, Integer>{
 	@Query(value="select Top(5) productId from Product where inMarketDate <= '2021-05-14' and productStatus='上架中' group by productId order by SUM(soldNumber) DESC", nativeQuery=true)
 	List<Integer> bestsellers();
 	
-	Optional<Product> findByProductIDAndColorCodeAndSize(Integer productID, String colorCode, String size);
-	
-	List<Product> findByProductIDAndColorCode(Integer productID, String colorCode);
+	Optional<Product> findByProductIDAndColorCodeAndSize(Integer productID, String colorCode, String size); 
 	
 }

@@ -272,75 +272,66 @@
 					<div class="col-lg-6 col-md-12">
 						<div class="product-details-img">
 							<div id="gallery" class="product-dec-slider-2 product-tab-left">
-								<a  id="pdLink1"
+								<a
 									data-image="${imgList[0]}"
 									data-zoom-image="${imgList[0]}">
 									<img
-									id="pdImg1"
 									src="${imgList[0]}"
 									alt="">
 								</a>
-								 <a id="pdLink2"
+								 <a
 									data-image="${imgList[1]}"
 									data-zoom-image="${imgList[1]}">
 									<img
-									id="pdImg2"
 									src="${imgList[1]}"
 									alt="">
 								</a> 
-								<a  id="pdLink3"
+								<a
 									data-image="${imgList[2]}"
 									data-zoom-image="${imgList[2]}">
 									<img
-									id="pdImg3"
 									src="${imgList[2]}"
 									alt="">
 								</a> 
-								<a  id="pdLink4"
+								<a
 									data-image="${imgList[3]}"
 									data-zoom-image="${imgList[3]}">
 									<img
-									id="pdImg4"
 									src="${imgList[3]}"
 									alt="">
 								</a> 
-								<a  id="pdLink5"
+								<a
 									data-image="${imgList[4]}"
 									data-zoom-image="${imgList[4]}">
 									<img
-									id="pdImg5"
 									src="${imgList[4]}"
 									alt="">
 								</a>
-								<a  id="pdLink6"
+								<a
 									data-image="${imgList[5]}"
 									data-zoom-image="${imgList[5]}">
 									<img
-									id="pdImg6"
 									src="${imgList[5]}"
 									alt="">
 								</a>								
-								<a  id="pdLink7"
+								<a
 									data-image="${imgList[6]}"
 									data-zoom-image="${imgList[6]}">
 									<img
-									id="pdImg7"
 									src="${imgList[6]}"
 									alt="">
 								</a>
-								<a  id="pdLink8"
+								<a
 									data-image="${imgList[7]}"
 									data-zoom-image="${imgList[7]}">
 									<img
-									id="pdImg8"
 									src="${imgList[7]}"
 									alt="">
 								</a>
-								<a  id="pdLink9"
+								<a
 									data-image="${imgList[8]}"
 									data-zoom-image="${imgList[8]}">
 									<img
-									id="pdImg9"
 									src="${imgList[8]}"
 									alt="">
 								</a>
@@ -641,7 +632,7 @@
 
 	<!-- All JS is here
 ============================================ -->
-
+	<script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
 	<!-- jQuery JS -->
 	<script src="/blankShop/assets/js/vendor/jquery-1.12.4.min.js"></script>
 	<!-- Popper JS -->
@@ -655,9 +646,7 @@
 	<!-- Main JS -->
 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 	<script src="/blankShop/assets/js/main.js"></script>
-	<script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
-	<script src="/blankShop/assets/js/header.js"></script>
-
+	 <script src="/blankShop/assets/js/header.js"></script>
 	
 
 	<script>
@@ -671,41 +660,12 @@
 
 		$("#iconsContainer li").click(
 				function() {
+					console.log($(this).css("background-color"));
 					colorCode=$(this).find('input:first-child').val();
-					var changeImgData={productID:productID, colorCode:colorCode};
 					var idx = $(this).index();
 					$("#underlineContainer li").css("border", "none");
 					$("#underlineContainer li").eq(idx).css("border-top","1px solid #000000");
-					$.ajax({
-
-						data:JSON.stringify(changeImgData),
-					    url:'/blankShop/frontEnd/product/productImg',
-					    contentType:"application/json",
-					    type:'POST',
-					    dataType:'json',
-					    error: function (xhr, status, error) { 
-				        console.log(error);},
-						success:function(data){
-							
-							$('.zoompro').data("image",data['1']);
-							$('.zoompro').data("zoom-image",data['1']);
-							$('.zoompro').attr("src",data['1']);
-							
-							var imgsLink=document.querySelectorAll(".product-dec-slider-2.product-tab-left a");
-							var imgs=document.querySelectorAll(".product-dec-slider-2.product-tab-left img");
-
-							for (var i=0; i<9; i++){
-								var dataIndex=i+1;
-								var dataIndexStr=dataIndex.toString();
-								document.getElementById("pdLink"+dataIndexStr).setAttribute('data-image',data[dataIndexStr]);
-								document.getElementById("pdLink"+dataIndexStr).setAttribute('data-zoom-image',data[dataIndexStr]);
-								document.getElementById("pdImg"+dataIndexStr).setAttribute('src',data[dataIndexStr]);
-							}
-							
-						}
-					});
-
-		});
+				});
 
 		$(".pro-details-size-content li").click(
 				function() {
@@ -768,15 +728,30 @@
 									if(localStorage.getItem('cartItems')==null){
 										var cartItems=[];
 										cartItems.push(result);
+										var amount=0;
+										var total=0;
+										for (var i=0; i<cartItems.length; i++){
+											amount+=parseInt(cartItems[i].amount);
+											total+=parseInt(cartItems[i].price);
+										}				
 										localStorage.setItem('cartItems',JSON.stringify(cartItems));
-										location.reload();
-										
+										$(".count-style").css('visibility','visible');
+										$(".count-style").html(amount.toString());
+										$(".cart-price").html("NT$ "+total);
 									}
 									else{
 										var cartItems=JSON.parse(localStorage.getItem('cartItems'));
 										cartItems.push(result);
+										var amount=0;
+										var total=0;
+										for (var i=0; i<cartItems.length; i++){
+											amount+=parseInt(cartItems[i].amount);
+											total+=parseInt(cartItems[i].price);
+										}				
 										localStorage.setItem('cartItems',JSON.stringify(cartItems));
-										location.reload();
+										$(".count-style").css('visibility','visible');
+										$(".count-style").html(amount.toString());
+										$(".cart-price").html("NT$ "+total);
 									}
 								}
 							})
