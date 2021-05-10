@@ -35,6 +35,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,10 +67,10 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Controller
-@SessionAttributes({ "alertmsg","result","pageResult"})
+@SessionAttributes({ "alertmsg", "result", "pageResult" })
 @RequestMapping("/frontEnd")
 public class frontEndController {
-	
+
 	String noImage = "classpath:static/img/frontEnd/NoImage1.jpg";
 	@Autowired
 	MemberService memberService;
@@ -82,18 +83,18 @@ public class frontEndController {
 
 	@Autowired
 	ProductService pdService;
-	
+
 	@Autowired
 	ReviewService rvService;
-	
+
 	@Autowired
 	ResourceLoader resourceLoader;
-	
+
 	@GetMapping("/test")
 	public String test() {
-		
+
 		return "productList";
-		
+
 	}
 
 	public synchronized boolean isCaptchaValid(String secretKey, String token) {
@@ -221,7 +222,7 @@ public class frontEndController {
 
 			Member memberNew = memberService.getMemberbyEmail(email);
 			session.setAttribute("memberId", memberNew.getMemberId());
-			
+
 			if (memberNew.getProfileImg() != null) {
 				byte[] base64 = Base64Utils.encode(memberNew.getProfileImg());
 				String strbase64 = new String(base64);
@@ -247,132 +248,133 @@ public class frontEndController {
 		return new ResponseEntity<byte[]>(adImg, headers, HttpStatus.OK);
 
 	}
-	
 
 	@GetMapping("/products/setIndex/{index}")
 	public String setProductDisplayIndex(@PathVariable Integer index, Model m) {
 		m.addAttribute("displayIndex", index);
 		return "productList";
 	}
-	
-	public ArrayList<Product> selectDistinctProduct(List<Product> duplicateList){
-		ArrayList<Product> result=new ArrayList<Product>();
-		ArrayList<Integer> indexList=new ArrayList<Integer>();
-		
-		for (Product item: duplicateList) {
-			if (indexList.indexOf(item.getProductID())==-1) {
+
+	public ArrayList<Product> selectDistinctProduct(List<Product> duplicateList) {
+		ArrayList<Product> result = new ArrayList<Product>();
+		ArrayList<Integer> indexList = new ArrayList<Integer>();
+
+		for (Product item : duplicateList) {
+			if (indexList.indexOf(item.getProductID()) == -1) {
 				indexList.add(item.getProductID());
 				result.add(item);
 			}
 		}
-		
+
 		return result;
 	}
+
 	@GetMapping("/products/getIndex/{index}")
 	@ResponseBody
 	public ArrayList<Product> getProductDisplayIndex(@PathVariable Integer index, Model m) {
-		
-		ArrayList<Product> result=new ArrayList<Product>(); 
+
+		ArrayList<Product> result = new ArrayList<Product>();
 
 		switch (index) {
 
-		    case 1:
-		    List<Product> items1=pdService.allProducts();
-		    result=new ArrayList<Product>(this.selectDistinctProduct(items1));
+		case 1:
+			List<Product> items1 = pdService.allProducts();
+			result = new ArrayList<Product>(this.selectDistinctProduct(items1));
 			break;
-			
-		    case 2:
-		    List<Product> items2=pdService.itemsOfGenre("上衣");
-			result=new ArrayList<Product>(this.selectDistinctProduct(items2));
-		    break;
-		    
-		    case 3:
-		    List<Product> items3=pdService.itemsOfGenre("襯衫");
-			result=new ArrayList<Product>(this.selectDistinctProduct(items3));
+
+		case 2:
+			List<Product> items2 = pdService.itemsOfGenre("上衣");
+			result = new ArrayList<Product>(this.selectDistinctProduct(items2));
 			break;
-			
-		    case 4:
-			List<Product> items4=pdService.itemsOfGenre("褲裝");
-			result=new ArrayList<Product>(this.selectDistinctProduct(items4));
+
+		case 3:
+			List<Product> items3 = pdService.itemsOfGenre("襯衫");
+			result = new ArrayList<Product>(this.selectDistinctProduct(items3));
 			break;
-			    
-		    case 5:
-			List<Product> items5=pdService.itemsOfGenre("裙裝");
-			result=new ArrayList<Product>(this.selectDistinctProduct(items5));
+
+		case 4:
+			List<Product> items4 = pdService.itemsOfGenre("褲裝");
+			result = new ArrayList<Product>(this.selectDistinctProduct(items4));
 			break;
-			    
-		    case 6:
-			List<Product> items6=pdService.newProducts("2021-04-01", "2021-05-14");
-			result=new ArrayList<Product>(this.selectDistinctProduct(items6));
+
+		case 5:
+			List<Product> items5 = pdService.itemsOfGenre("裙裝");
+			result = new ArrayList<Product>(this.selectDistinctProduct(items5));
 			break;
-			    
-		    case 7:
-			List<Product> items7=pdService.onSaleItems();
-			result=new ArrayList<Product>(this.selectDistinctProduct(items7));
+
+		case 6:
+			List<Product> items6 = pdService.newProducts("2021-04-01", "2021-05-14");
+			result = new ArrayList<Product>(this.selectDistinctProduct(items6));
+			break;
+
+		case 7:
+			List<Product> items7 = pdService.onSaleItems();
+			result = new ArrayList<Product>(this.selectDistinctProduct(items7));
 			break;
 		}
-		
-	 m.addAttribute("result", result);
-	 m.addAttribute("pageResult", result);
-		
-		return result;	
+
+		m.addAttribute("result", result);
+		m.addAttribute("pageResult", result);
+
+		return result;
 	}
-	
+
 	@PostMapping("/products/searchAll")
 	@ResponseBody
 	public ArrayList<Product> searchAll(@RequestParam("keyword") String keyword, Model m) {
-		
-		keyword="%"+keyword+"%";
-		
-		ArrayList<Product> result=new ArrayList<Product>();
-		List<Product> duplicateResult=pdService.itemsOfKeyword(keyword);
-		result=new ArrayList<Product>(this.selectDistinctProduct(duplicateResult));
+
+		keyword = "%" + keyword + "%";
+
+		ArrayList<Product> result = new ArrayList<Product>();
+		List<Product> duplicateResult = pdService.itemsOfKeyword(keyword);
+		result = new ArrayList<Product>(this.selectDistinctProduct(duplicateResult));
 		m.addAttribute("result", result);
 		m.addAttribute("pageResult", result);
-		return result;	
+		return result;
 	}
-	
+
 	@GetMapping("/products/orderByDate")
 	@ResponseBody
-	public ArrayList<Product> orderByDate(@ModelAttribute("pageResult") ArrayList<Product> pageResult){
-		Collections.sort(pageResult, new dateComparator());		
-		return pageResult;		
+	public ArrayList<Product> orderByDate(@ModelAttribute("pageResult") ArrayList<Product> pageResult) {
+		Collections.sort(pageResult, new dateComparator());
+		return pageResult;
 	}
-	
+
 	@GetMapping("/products/orderByPrice")
 	@ResponseBody
-	public ArrayList<Product> orderByPrice(@ModelAttribute("pageResult") ArrayList<Product> pageResult){  
-	   Collections.sort(pageResult, new priceComparator());
-	   return pageResult;
+	public ArrayList<Product> orderByPrice(@ModelAttribute("pageResult") ArrayList<Product> pageResult) {
+		Collections.sort(pageResult, new priceComparator());
+		return pageResult;
 	}
-	
-	
-	@PostMapping("/products/pageFilter")
-	public @ResponseBody ArrayList<Product> pageFilter(@RequestBody HashMap<String, String> filterRequest, @ModelAttribute("result") ArrayList<Product> result, Model m){
-		
 
-		ArrayList<String> genreList=new ArrayList<String>();
-		ArrayList<String> purposeList=new ArrayList<String>();
-		ArrayList<Product> filterResult1=new ArrayList<Product>();
-		ArrayList<Product> filterResult2=new ArrayList<Product>();
-		ArrayList<Product> filterResult3=new ArrayList<Product>();
-		
-		Integer minPrice=0;
-		Integer maxPrice=0;
-		
-		if(filterRequest.get("tops").equals("0")&&filterRequest.get("shirts").equals("0")&&filterRequest.get("trousers").equals("0")&&filterRequest.get("dresses").equals("0")) {
+	@PostMapping("/products/pageFilter")
+	public @ResponseBody ArrayList<Product> pageFilter(@RequestBody HashMap<String, String> filterRequest,
+			@ModelAttribute("result") ArrayList<Product> result, Model m) {
+
+		ArrayList<String> genreList = new ArrayList<String>();
+		ArrayList<String> purposeList = new ArrayList<String>();
+		ArrayList<Product> filterResult1 = new ArrayList<Product>();
+		ArrayList<Product> filterResult2 = new ArrayList<Product>();
+		ArrayList<Product> filterResult3 = new ArrayList<Product>();
+
+		Integer minPrice = 0;
+		Integer maxPrice = 0;
+
+		if (filterRequest.get("tops").equals("0") && filterRequest.get("shirts").equals("0")
+				&& filterRequest.get("trousers").equals("0") && filterRequest.get("dresses").equals("0")) {
 			filterRequest.put("tops", "1");
 			filterRequest.put("shirts", "1");
 			filterRequest.put("trousers", "1");
 			filterRequest.put("dresses", "1");
 		}
-		
-		if(filterRequest.get("leisure").equals("0")&&filterRequest.get("date").equals("0")&&filterRequest.get("workPlace").equals("0")) {
+
+		if (filterRequest.get("leisure").equals("0") && filterRequest.get("date").equals("0")
+				&& filterRequest.get("workPlace").equals("0")) {
 			filterRequest.put("leisure", "1");
 			filterRequest.put("date", "1");
 			filterRequest.put("workPlace", "1");
 		}
-		
+
 		if (filterRequest.get("tops").equals("1")) {
 			genreList.add("上衣");
 		}
@@ -385,129 +387,125 @@ public class frontEndController {
 		if (filterRequest.get("dresses").equals("1")) {
 			genreList.add("裙裝");
 		}
-		
-		if(filterRequest.get("leisure").equals("1")) {
+
+		if (filterRequest.get("leisure").equals("1")) {
 			purposeList.add("居家休閒");
 		}
-		
-		if(filterRequest.get("date").equals("1")) {
+
+		if (filterRequest.get("date").equals("1")) {
 			purposeList.add("約會必勝");
 		}
-		
-		if(filterRequest.get("workPlace").equals("1")) {
+
+		if (filterRequest.get("workPlace").equals("1")) {
 			purposeList.add("職場穿搭");
 		}
-		
-		
-		for(Product product:result) {
-				if(genreList.indexOf(product.getGenre())!=-1) {
-					filterResult1.add(product);
-				}
-		}
-		
-		for(Product product:filterResult1) {
-				if(purposeList.indexOf(product.getPurpose())!=-1) {
-					filterResult2.add(product);
+
+		for (Product product : result) {
+			if (genreList.indexOf(product.getGenre()) != -1) {
+				filterResult1.add(product);
 			}
 		}
-		
-		if ((filterRequest.get("minPrice").equals("0"))&&(filterRequest.get("maxPrice").equals("0"))){
-			minPrice=100;
-			maxPrice=10000;
 
+		for (Product product : filterResult1) {
+			if (purposeList.indexOf(product.getPurpose()) != -1) {
+				filterResult2.add(product);
+			}
 		}
-		else {
-			minPrice=Integer.parseInt(filterRequest.get("minPrice"));
-			maxPrice=Integer.parseInt(filterRequest.get("maxPrice"));
+
+		if ((filterRequest.get("minPrice").equals("0")) && (filterRequest.get("maxPrice").equals("0"))) {
+			minPrice = 100;
+			maxPrice = 10000;
+
+		} else {
+			minPrice = Integer.parseInt(filterRequest.get("minPrice"));
+			maxPrice = Integer.parseInt(filterRequest.get("maxPrice"));
 		}
-		
-		for (Product product:filterResult2) {
-			if(product.getSalePrice()==0) {
+
+		for (Product product : filterResult2) {
+			if (product.getSalePrice() == 0) {
 				product.setSalePrice(product.getProductPrice());
 			}
-			
-			Integer price=product.getSalePrice();
-			if ((price<=maxPrice)&&(price>=minPrice)) {
+
+			Integer price = product.getSalePrice();
+			if ((price <= maxPrice) && (price >= minPrice)) {
 				filterResult3.add(product);
 			}
 		}
-		
-		
-		m.addAttribute("pageResult",filterResult3);
-		
+
+		m.addAttribute("pageResult", filterResult3);
+
 		return filterResult3;
 	}
-	
+
 	@GetMapping("/product/{productID}")
 	public String loadProductPage(@PathVariable Integer productID, Model m) {
-		List<Product> products=pdService.findByProductID(productID);
-		ArrayList<String> colorList=new ArrayList<String>();
-		ArrayList<String> imgList=new ArrayList<String>();
-		
-		for (Product item:products) {
-			if(colorList.indexOf(item.getColorCode())==-1) {
+		List<Product> products = pdService.findByProductID(productID);
+		ArrayList<String> colorList = new ArrayList<String>();
+		ArrayList<String> imgList = new ArrayList<String>();
+
+		for (Product item : products) {
+			if (colorList.indexOf(item.getColorCode()) == -1) {
 				colorList.add(item.getColorCode());
 			}
 		}
-		
-		for (Product item:products) {
+
+		for (Product item : products) {
 			imgList.add(item.getProductImgDir1());
 			imgList.add(item.getProductImgDir2());
 			imgList.add(item.getProductImgDir3());
 		}
-		
-		Product product=products.get(0);
-		if (product.getSalePrice()==0) {
+
+		Product product = products.get(0);
+		if (product.getSalePrice() == 0) {
 			product.setSalePrice(product.getProductPrice());
 			product.setProductPrice(null);
 		}
-		
-		m.addAttribute("imgList",imgList);
-		m.addAttribute("product",product);
-		m.addAttribute("colorList",colorList);
+
+		m.addAttribute("imgList", imgList);
+		m.addAttribute("product", product);
+		m.addAttribute("colorList", colorList);
 		return "product";
 	}
-	
-	
+
 	@PostMapping("/product/checkStock")
-	public @ResponseBody HashMap<String, String> checkStock(@RequestBody HashMap<String, String> cartRequest){
-		
-		HashMap<String, String> stockMsg=new HashMap<String, String>();
-		Integer productID=Integer.parseInt(cartRequest.get("productID"));
-		String colorCode=cartRequest.get("colorCode");
-		String size=cartRequest.get("size");
-		Integer quantity=Integer.parseInt(cartRequest.get("quantity"));
-		Product product=pdService.findByProductIDAndColorCodeAndSize(productID, colorCode, size);
-		if (product.getStockNumber()<quantity) {
+	public @ResponseBody HashMap<String, String> checkStock(@RequestBody HashMap<String, String> cartRequest) {
+
+		HashMap<String, String> stockMsg = new HashMap<String, String>();
+		Integer productID = Integer.parseInt(cartRequest.get("productID"));
+		String colorCode = cartRequest.get("colorCode");
+		String size = cartRequest.get("size");
+		Integer quantity = Integer.parseInt(cartRequest.get("quantity"));
+		Product product = pdService.findByProductIDAndColorCodeAndSize(productID, colorCode, size);
+		if (product.getStockNumber() < quantity) {
 			stockMsg.put("msg", "fail");
 			stockMsg.put("stockNumber", Integer.toString(product.getStockNumber()));
-		}
-		else {
+		} else {
 			stockMsg.put("msg", "success");
 		}
-		
+
 		return stockMsg;
 	}
-	
+
 	@PostMapping("/product/placeInCart")
-	public @ResponseBody HashMap<String, String> placeInCart(@RequestBody HashMap<String, String> cartRequest, HttpSession session){
-		
-		HashMap<String, String> cartInfo=new HashMap<String, String>();
-		
-		Integer productID=Integer.parseInt(cartRequest.get("productID"));
-		String colorCode=cartRequest.get("colorCode");
-		String size=cartRequest.get("size");
-		
-		Product product=pdService.findByProductIDAndColorCodeAndSize(productID, colorCode, size);
-		
-		if (product.getSalePrice()==0) {
+	public @ResponseBody HashMap<String, String> placeInCart(@RequestBody HashMap<String, String> cartRequest,
+			HttpSession session) {
+
+		HashMap<String, String> cartInfo = new HashMap<String, String>();
+
+		Integer productID = Integer.parseInt(cartRequest.get("productID"));
+		String colorCode = cartRequest.get("colorCode");
+		String size = cartRequest.get("size");
+
+		Product product = pdService.findByProductIDAndColorCodeAndSize(productID, colorCode, size);
+
+		if (product.getSalePrice() == 0) {
 			product.setSalePrice(product.getProductPrice());
 
 		}
-		
-		Integer memberId=(Integer) session.getAttribute("memberId");
-		String email=(String) session.getAttribute("email");
-		
+
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		String email = (String) session.getAttribute("email");
+
 		cartInfo.put("memberId", memberId.toString());
 		cartInfo.put("email", email);
 		cartInfo.put("color", cartRequest.get("colorCode"));
@@ -517,36 +515,53 @@ public class frontEndController {
 		cartInfo.put("productImg", product.getProductImgDir1());
 		cartInfo.put("productName", product.getProductName());
 		cartInfo.put("typeId", product.getTypeId().toString());
-		
+
 		return cartInfo;
 	}
-	
+
 	@PostMapping("/product/productImg")
-	public @ResponseBody HashMap<String, String> getProductImg(@RequestBody HashMap<String, String> imgRequest){
-		
-		HashMap<String, String> imgList=new HashMap<String, String>();
-		
-		Integer productID=Integer.parseInt(imgRequest.get("productID"));
-	    String colorCode=imgRequest.get("colorCode");
-		
-		List<Product> products=pdService.findByProductIDAndColorCode(productID, colorCode);
-		
-		for(int i=0; i<products.size();i++) {
-				imgList.put(String.valueOf(3*i+1), products.get(i).getProductImgDir1());
-				imgList.put(String.valueOf(3*i+2), products.get(i).getProductImgDir2());
-				imgList.put(String.valueOf(3*i+3), products.get(i).getProductImgDir3());
+	public @ResponseBody HashMap<String, String> getProductImg(@RequestBody HashMap<String, String> imgRequest) {
+
+		HashMap<String, String> imgList = new HashMap<String, String>();
+
+		Integer productID = Integer.parseInt(imgRequest.get("productID"));
+		String colorCode = imgRequest.get("colorCode");
+
+		List<Product> products = pdService.findByProductIDAndColorCode(productID, colorCode);
+
+		for (int i = 0; i < products.size(); i++) {
+			imgList.put(String.valueOf(3 * i + 1), products.get(i).getProductImgDir1());
+			imgList.put(String.valueOf(3 * i + 2), products.get(i).getProductImgDir2());
+			imgList.put(String.valueOf(3 * i + 3), products.get(i).getProductImgDir3());
 		}
-		
+
 		return imgList;
-		
+
 	}
-	
+
 	@GetMapping("/product/reviews/{productId}")
-	public @ResponseBody List<Review> loadReviews(@PathVariable Integer productId) {	
-		List<Review> reviews=rvService.findByProductId(productId);
+	public @ResponseBody List<Review> loadReviews(@PathVariable Integer productId) {
+		List<Review> reviews = rvService.findByProductId(productId);
 		return reviews;
 	}
+
+	@PostMapping("/product/reviews/{productId}")
+	public @ResponseBody Review insertReviews(@PathVariable Integer productId, @RequestParam("memberId") String memberId, @RequestParam("reviewName") String reviewName, @RequestParam("reviewContent") String reviewContent) {
+		Review review=new Review();
+		review.setProductId(productId);
+		review.setReviewName(reviewName);
+		Member member=memberService.getMemberbyId(Integer.parseInt(memberId));
+		review.setMember(member);
+		review.setReviewContent(reviewContent);
+		Review newReview=rvService.save(review); 
+		return newReview;
+	}
 	
+	@DeleteMapping("/product/reviews/{reviewId}")
+	public @ResponseBody void insertReviews(@PathVariable Integer reviewId) {
+		rvService.deleteById(reviewId);
+	}
+
 	@GetMapping("/orders")
 	public @ResponseBody List<OrderDTO> getOrderByOrderId(Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -557,46 +572,46 @@ public class frontEndController {
 	@PostMapping("/register")
 	public String insertMember(@RequestParam(name = "user-name") String memberName,
 			@RequestParam(name = "user-email") String email, @RequestParam(name = "user-password") String password,
-			Member mb, Model model ) throws IOException {
-		String result11= "";
+			Member mb, Model model) throws IOException {
+		String result11 = "";
 		System.out.println(email);
-			
+
 		// 判斷email是否有註冊過
 		if (memberService.checkMemberbyEmail(email)) {
-			 result11 = "fail";
+			result11 = "fail";
 			model.addAttribute("alertmsg", result11);
 //			Map<String, String> errormsg = new HashMap<String, String>();
 //			errormsg.put("msg", "此信箱已經註冊過、請重新輸入");
 //			model.addAttribute("errormsg", errormsg);
 			return "redirect:/frontEnd/tranToRegister?status=fail";
 		} else {
-				//上傳預設圖片
-				byte[] originalImgByte=null;						
-				BufferedImage bufferedImage;
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					
-				try {
-					
-					Resource resource = resourceLoader.getResource(noImage); 	
-					File file = resource.getFile();
-					bufferedImage = ImageIO.read(file);
-					ImageIO.write(bufferedImage, "jpg", baos);
-					baos.flush();
-					originalImgByte = baos.toByteArray();
-					baos.close();
-					mb.setProfileImg(originalImgByte);
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-			result11="good";
-			model.addAttribute("alertmsg",result11);
+			// 上傳預設圖片
+			byte[] originalImgByte = null;
+			BufferedImage bufferedImage;
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+			try {
+
+				Resource resource = resourceLoader.getResource(noImage);
+				File file = resource.getFile();
+				bufferedImage = ImageIO.read(file);
+				ImageIO.write(bufferedImage, "jpg", baos);
+				baos.flush();
+				originalImgByte = baos.toByteArray();
+				baos.close();
+				mb.setProfileImg(originalImgByte);
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+			result11 = "good";
+			model.addAttribute("alertmsg", result11);
 			mb.setMemberName(memberName);
 			mb.setEmail(email);
 			mb.setPassword(password);
-		
+
 			memberService.save(mb);
-			
+
 			return "redirect:/frontEnd/tranToRegister?status=good";
 		}
 	}
@@ -607,7 +622,7 @@ public class frontEndController {
 		Integer id = (Integer) session.getAttribute("memberId");
 		Member mb = memberService.getMemberbyId(id);
 		model.addAttribute(mb);
-	
+
 		return "my-account";
 	}
 
@@ -637,10 +652,10 @@ public class frontEndController {
 			@RequestParam("fileupload") MultipartFile multipartFile, Model m, HttpSession session) throws IOException {
 
 		String result = "";
-		
+
 		Member member = memberService.getMemberbyEmail(email);
 		byte[] picture = multipartFile.getBytes();
-		
+
 		if (picture.length == 0) {
 			result = "good";
 		} else {
@@ -648,8 +663,7 @@ public class frontEndController {
 			byte[] base64 = Base64Utils.encode(multipartFile.getBytes());
 			String strbase64 = new String(base64);
 			session.setAttribute("proImgSrc", "data:image/png;base64," + strbase64);
-			
-			
+
 			result = "good";
 		}
 		if (memberName.equals("") == false) {
@@ -671,12 +685,12 @@ public class frontEndController {
 		member.setEmail(email);
 
 		memberService.update(member);
-		
+
 		m.addAttribute("alertmsg", result);
 		m.addAttribute("Member", member);
 		return "redirect:/frontEnd/showmem";
 	}
-			
+
 	// 單獨修改密碼功能
 	@PostMapping("/editpassword")
 	public String editpassword(@RequestParam Integer id, @RequestParam(name = "new-pwd") String password,

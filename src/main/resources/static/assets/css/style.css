@@ -7452,3 +7452,10 @@ h3.cart-page-title {
 .sli.sli-close.delete-msg-btn:hover{
   color: #dda769;
 }
+
+.delete-box{
+  position:absolute;
+  right: 50px;
+}
+
+

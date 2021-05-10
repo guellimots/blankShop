@@ -38,7 +38,6 @@ public class MembersServiceImpl implements MemberService {
 			
 		}
 		
-		
 	}
 
 	@Override

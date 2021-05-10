@@ -435,7 +435,7 @@
 							<div class="description-review-topbar nav">
 								<a class="active" data-toggle="tab" href="#des-details1">洗滌注意事項</a>
 								<a data-toggle="tab" href="#des-details3">尺寸表</a> <a
-									data-toggle="tab" href="#des-details2">評論 (3)</a>
+									data-toggle="tab" href="#des-details2" id="review-count"></a>
 							</div>
 							<div class="tab-content description-review-bottom">
 								<div id="des-details1" class="tab-pane active">
@@ -566,17 +566,17 @@
 													<div class="col-md-12">
 														<div class="rating-form-style mb-20">
 															<label>您的評論 <span>*</span></label>
-															<textarea name="Your Review" id="review"></textarea>
+															<textarea name="Your Review" id="review" required></textarea>
 														</div>
 													</div>
 													<div class="col-md-12">
 														<div class="rating-form-style mb-20">
-															<label>姓名 <span>*</span></label> <input type="text" id="name">
+															<label>姓名 <span>*</span></label> <input type="text" id="name" required>
 														</div>
 													</div>
 													<div class="col-md-12">
 														<div class="rating-form-style mb-20">
-															<label>Email <span>*</span></label> <input type="email" id="email">
+															<label>Email <span>*</span></label> <input type="email" id="email" value=${sessionScope.email} readonly>
 														</div>
 													</div>
 													<div class="col-lg-12">
