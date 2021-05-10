@@ -19,7 +19,7 @@
             function  onConnected() {
                 
                 // 訂閱/topic/public
-                stompClient.subscribe('/topic/public', onMessageReceived); // 當後端送訊息至/topic/public時，會執行onMessageReceived()。
+                stompClient.subscribe('/topic/public/getproduct', onMessageReceived); // 當後端送訊息至/topic/public時，會執行onMessageReceived()。
                 sendMessage()
             }
             
