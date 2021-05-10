@@ -2,7 +2,7 @@
 // $(function () {
 
             var stompClient = null;
- 
+           
             connect();
 
             function connect() {
@@ -19,7 +19,7 @@
             function  onConnected() {
                 
                 // 訂閱/topic/public
-                stompClient.subscribe('/topic/public', onMessageReceived); // 當後端送訊息至/topic/public時，會執行onMessageReceived()。
+                stompClient.subscribe('/topic/public/getproduct', onMessageReceived); // 當後端送訊息至/topic/public時，會執行onMessageReceived()。
                 sendMessage()
             }
             
@@ -38,10 +38,9 @@
             }
 
             function onMessageReceived(data) {
-                var list = "";
+                
                var JsonData = JSON.parse(data.body);
-                // 
-                // alert(JsonData[i]["productName"])
+               var list = "";
                 for(let i = 0 ; i<JsonData.length;i++){
                  list +=  "<div class='dropdown-divider'></div>"+
                             "<a  class='dropdown-item'>"+

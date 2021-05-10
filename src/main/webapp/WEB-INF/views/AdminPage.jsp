@@ -1,20 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords"
-	content="html,css,javascript,bootstrap4,jquery,jquery-ui">
-
+<meta name="keywords" content="html,css,javascript,bootstrap4,jquery,jquery-ui">
 <meta name="description" content="EDU 第一組期末專題專案">
+<!-- websocket -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <!--    libs for stomp and sockjs-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+
+    <!--    end libs for stomp and sockjs-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+          type="text/css">
+    <link href="/blankShop/css/backEnd/circle.css" rel="stylesheet">
+
+
+
+
 <title>BlankShop 後臺管理系統</title>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/blankShop/plugins/fontawesome-free/css/all.min.css">
@@ -28,19 +39,17 @@
 <!-- dialog -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/blankShop/js/backEnd/product/notificationProduct.js"></script>
+<title>BlankShop 後臺管理系統</title>
 </head>
 <!-- /GetButton.io widget -->
-<body class="hold-transition sidebar-mini layout-fixed"
-	data-panel-auto-height-mode="height">
+<body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
+	<!-- websocket的預設admin -->
 	<div class="wrapper">
 		<!-- 後台Blankshop容器 -->
-		<nav
-			class="main-header navbar navbar-expand navbar-white navbar-light">
+		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
 			<!-- 左上功能鍵 -->
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
-					href="#" role="button"><i class="fas fa-bars"></i></a></li>
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<!-- 後台頁面設定 -->
 				<li class="nav-item d-none d-sm-inline-block">
 				<a  class="nav-link" id="annousment">公告</a></li>
@@ -62,11 +71,12 @@
 				<!-- 即時通訊息功能-->
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href=""> 
-					<i class="fa fa-comments" id="comments"></i>
+					<i class="far fa-comments"  id="comments"></i>
+					<span class="badge badge-success navbar-badge" id="msginf"></span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<a href="/blankShop/backEnd/adminChatRoomView" class="dropdown-item" ><span class="fa fa-user-circle" id="userone">  客人聯繫</span></a>
-						<a href="/blankShop/backEnd/adminChatRoom" class="dropdown-item" id="group"><span class="fa fa-users" id="usergroup">  員工群組</span></a>
+						<a id="goToChat" href="/blankShop/backEnd/adminChatRoomView" class="dropdown-item" ><span id="userInf" class="fa fa-user-circle">  客人聯繫</span></a>
+						<a href="/blankShop/backEnd/adminChatRoom" class="dropdown-item" id="group"><span class="fa fa-users" id="usergroup">  群組聯繫</span></a>
 					</div>
 					
 				<!-- 警示通訊息功能-->
@@ -114,6 +124,7 @@
 					<div class="info">
 						<a class="d-block"> ${empname} - ${empid}</a> 
 						<input type="hidden" id="empid" name="empid" value="${empid}">
+						<input id="userName" value="admin" placeholder="search" type="hidden">
 						<!-- 員工登入顯示(照片、員編、姓名) -->
 					</div>
 				</div>
@@ -339,12 +350,28 @@
 	<!-- jQuery UI 1.11.4 -->
 	<script src="/blankShop/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 44c5550fcf53e25763b71b687a47be897c1297c1
 	<script src="/blankShop/js/backEnd/chatroom/checkmessage.js"></script>
+	<script src="/blankShop/js/backEnd/memberChat/admincustom.js"></script>
+	<script src="/blankShop/js/backEnd/memberChat/adminchat.js"></script>
+	<script src="/blankShop/js/backEnd/product/notificationProduct.js"></script>
 	<script>
 		$.widget.bridge('uibutton', $.ui.button)
 	</script>
 	<script>
 		$(document).ready(function() {
+			registration() 
+			
+			$("#goToChat").click(function(){
+
+			$("#msginf").html("")
+			$("#circleOnline").remove();
+			})	
+
+
 			getuser()
 			postID();
 			var empID
@@ -361,6 +388,10 @@
 			}
 		})
 	</script>
+
+
+
+
 	<!-- Bootstrap 4 -->
 	<script src="/blankShop/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- overlayScrollbars -->
@@ -373,7 +404,8 @@
 	<script src="/blankShop/js/backEnd/order/findorderDailyItem.js"></script>
 	<script src="/blankShop/js/backEnd/showmessage.js"></script>
 	<script src="/blankShop/js/backEnd/adminindex.js"></script>
-	
+
+
 
 </body>
 </html>

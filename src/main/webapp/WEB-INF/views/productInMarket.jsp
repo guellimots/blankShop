@@ -7,8 +7,8 @@
 		<head>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-		
-
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+			
 			<!-- include libraries(jQuery, bootstrap) -->
 
 			<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -153,18 +153,24 @@
 				<div id="dis1"></div>
 				<div id="dis2"></div>
 			</div>
-
-
+			<div  width="400" height="400">
+				<canvas id="myChart"></canvas>
+			</div>
+			
 		</body>
-
+		
+			
 		<!-- Script-->
 		<script type="text/javascript">
-
-		
+	
+		var myChart
 			//創建TABLE
 			$(function () {
-
-
+					//產品圖表
+							
+			
+					showProductChart(getProductChart());
+					
 					$('#snpd1').summernote();
 					$('#snpd2').summernote();
 					$('#editsnpd1').summernote();
@@ -179,6 +185,7 @@
 						"rowId":"typeId",
 						"order": [[0, "desc"]],
 						"columnDefs": [
+							// { "width": "5%", "targets": 0 },
 							{ targets: 2,
 							render: function(data) {
 								return "<div style='background-color:" +data+"'>&emsp;</div>"
@@ -248,7 +255,7 @@
 
 				//下架鍵
 				$('#downButton').button().on("click", function () {
-
+					
 					if(selectId==null)
 					alert("請選擇商品")
 
@@ -287,10 +294,16 @@
 							showConfirmButton: false,
 							timer: 1500
 							});
+							
 								
 							table.ajax.reload()
 							parent.sendMessage()
 							selectId=null
+							showProductChart(getProductChart());
+							
+						
+								
+							
 						}
 					})
 
@@ -423,16 +436,109 @@
 									
 									}
 								});
+								
+							
+							
+								
+							
+
+
+
+
 
 					
 			});
+	
+			
 
-						
+		
+			function showProductChart(datachart){
+				var colorSet = [ 
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)'
+						]
+						var colorBorderSet = [
+							'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)',
+							'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)',
+							'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)'
+						]
+				var chartlabels = [];
+				var chartdata = [];
+				var backgroundColor = [];
+				var borderColor = [];
+				var ctx = document.getElementById('myChart').getContext('2d');
+			
+				for(let i = 0,j=0; i <datachart.length;i++,j++){
+					chartlabels.push(datachart[i].productName)
+					chartdata.push(datachart[i].sum)
+					backgroundColor.push(colorSet[j])
+					borderColor.push(colorBorderSet[j])
+				
+					if(j==5)
+					j=0;
+				}
+				
+				if(myChart!=undefined)
+					myChart.destroy()
+					
+				
+				
+			 myChart = new Chart(ctx, {
+				type: 'bar',
+
+				data: {
+					labels: chartlabels,
+					datasets: [{
+						label: '銷售量',
+						data: chartdata,
+						backgroundColor:backgroundColor,
+						borderColor: borderColor,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					}
+				}
+			
+			});
+			
+		
+			}
+			
+						function getProductChart(){
+
+								var result
+							 $.ajax({
+										url :"/blankShop/backEnd/product/chart"	,
+										type :"get",
+										dataType: "json",
+										async :false , 
+										success: function(data){	
+
+											 result =  data;
+											
+										}
+
+									})
+									
+									return result;
+									
+								}
 
 
 		</script>
 		
-
 
 
 		</html>

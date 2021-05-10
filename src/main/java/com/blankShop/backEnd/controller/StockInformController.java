@@ -28,7 +28,7 @@ public class StockInformController {
      * 處理前端送來的聊天訊息，並把訊息推送給前端
      */
     @MessageMapping("/inform")
-    @SendTo("/topic/public")
+    @SendTo("/topic/public/getproduct")
     public List<Product> getStockNotification() {
 		return service.stocknotification();
 	}

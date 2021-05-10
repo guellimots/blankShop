@@ -5,6 +5,8 @@ public class ProductSales {
 	private String productName;
 	private Integer sum;
 
+	
+
 	public Integer getProductId() {
 		return productId;
 	}
@@ -28,5 +30,7 @@ public class ProductSales {
 	public void setSum(Integer sum) {
 		this.sum = sum;
 	}
+
+
 
 }

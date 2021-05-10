@@ -92,12 +92,19 @@
 <script src="/blankShop/js/backEnd/memberChat/admincustom.js"></script>
 <script src="/blankShop/js/backEnd/memberChat/adminchat.js"></script>
 <script>
-window.onload = function(){
+$(function(){
+    messagesStorage =parent.getMessagesStorage();
+    newMessages = parent.getNewMessages();
+    var iterator = messagesStorage.keys();
+   
+   for(let i = 0;i<messagesStorage.size;i++){
+    var userName = iterator.next().value
+     enterChatRoom(userName.substring(0,userName.indexOf("_")));
+   }
+ 
     registration()
-  
-
-}
-
+    
+});
 </script>
 </body>
 </html>
