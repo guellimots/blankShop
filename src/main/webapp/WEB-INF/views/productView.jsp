@@ -213,9 +213,9 @@
 
 						<label class="inputlabel" for="size">尺寸:</label> 
 						<select class="inputBar"  name="size"  id="selectsize" >
-							<option>L</option>
+							<!-- <option>L</option>
 							<option>M</option>
-							<option>S</option>
+							<option>S</option> -->
 						</select>
 
 
@@ -590,6 +590,10 @@
 				//新增單一商品
 				function createProduct() {
 
+
+					if(submitCheck()){
+
+
 					var formdata = new FormData($('#createForm')[0]);
 
 					$.ajax({
@@ -617,7 +621,7 @@
 						}
 					});
 
-
+				}
 				}
 
 
@@ -635,6 +639,7 @@
 						}
 					},
 					close: function () {
+						
 						$("#validateMsg").html(null)
 						$('#selectNewName').removeAttr("readonly")
 						selectboxRresh()
@@ -657,8 +662,9 @@
 
 				//新增鍵
 
-			
+					
 				$("#createButton").button().on("click", function () {
+					
 					$(".ui-dialog-titlebar-close").show();
 					
 					
@@ -717,7 +723,8 @@
 
 				//更新單一商品
 				function editProduct() {
-
+					
+					if(updateFormCheck()){
 					var formdata = new FormData($('#updateForm')[0]);
 
 					$.ajax({
@@ -753,7 +760,7 @@
 							});
 						}
 					});
-
+				}
 
 				}
 				//更新表單樣式
@@ -997,45 +1004,15 @@
 
 								
 										//檢查樣式
+								function submitCheck(){		
 
-								$("#createForm").submit(function(){
+								
 									var result={};
 									var status;
 										result.productName = $("#selectNewName").val()
 										result.size =   $("#selectsize").val()
 										result.colorCode = $("#selectcolor").val();
 										
-										if(result.productName!=""&&result.size!=""&&result.colorCode!="")
-											{
-										$.ajax({
-										url: "/blankShop/backEnd/product/checkstyle",
-										data: result,
-										type: "GET",
-										dataType: "json",
-										success: function (data) {
-											if(data.msg==1)
-											status=1
-											else
-											status=2
-										}
-									})
-								}
-										if(result.size==null)
-										return false
-										if(status==1)
-										return true
-										else
-										return false
-
-								
-							})
-								$("#updateForm").submit(
-									function(){
-									var result={};
-									var status;
-										result.productName = $("#productName").val()
-										result.size =   $("#size").val()
-										result.colorCode = $("#colorCode").val();
 										
 										if(result.productName!=""&&result.size!=""&&result.colorCode!="")
 											{
@@ -1044,6 +1021,7 @@
 										data: result,
 										type: "GET",
 										dataType: "json",
+										async:false,
 										success: function (data) {
 											if(data.msg==1)
 											status=1
@@ -1052,6 +1030,9 @@
 										}
 									})
 								}
+										if(result.size==null||result.size==undefined)
+										return false
+
 										
 										if(status==1)
 										return true
@@ -1060,9 +1041,46 @@
 
 								
 							
+						}
+
+
+						function updateFormCheck(){		
+
+								
+									var result={};
+									var status;
+										result.productName = $("#productName").val()
+										result.size =   $("#size").val()
+										result.colorCode = $("#colorCode").val();
+										
+										if(result.productName!=""&&result.size!=""&&result.colorCode!=""){
+											
+										$.ajax({
+										url: "/blankShop/backEnd/product/checkstyle",
+										data: result,
+										type: "GET",
+										dataType: "json",
+										async:false,
+										success: function (data) {
+										
+											if(data.msg==1)
+											status=1
+											else
+											status=2
+										}
+									})
+								}
+									
+										if(status==1)
+										return true
+										else
+										return false
+
+							}
+							
 
 									
-								})
+								
 								
 										
 								$("#selectsize").change(checkstyle);
@@ -1074,8 +1092,8 @@
 								
 								$("#colorCode").change(editcheckSize);
 								$("#colorCode").change(editcheckstyle);
-								$("#productName").change(editcheckstyle);
-								$("#productName").change(editcheckSize);
+								// $("#productName").change(editcheckstyle);
+								// $("#productName").change(editcheckSize);
 							
 							
 
@@ -1084,7 +1102,7 @@
 										result.productName = $("#selectNewName").val()
 										result.size =   $("#selectsize").val()
 										result.colorCode = $("#selectcolor").val();
-										console.log(result);
+										
 										if(result.productName!=""&&result.size!=""&&result.colorCode!="")
 											{
 										$.ajax({
@@ -1133,6 +1151,7 @@
 											
 
 											 if(sizes.length==0){
+												$("#selectsize").html("")
 											  result = "<option></option>";
 											  $("#validateMsg").html("<img src='/blankShop/img/backEnd/err.png'><span style='color:red'>請改變顏色</span>")	
 											}

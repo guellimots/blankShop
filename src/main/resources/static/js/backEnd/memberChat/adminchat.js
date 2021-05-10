@@ -12,6 +12,8 @@ function getNewMessages(){
 }
 
 function enterChatRoom(userName){
+   
+  
     let usersTemplateHTML = "";
           
     usersTemplateHTML = usersTemplateHTML + 
@@ -27,7 +29,9 @@ function enterChatRoom(userName){
        
         if($("#"+userName).html()==undefined)
         $('#usersList').append(usersTemplateHTML);
+      
 
+      
         
         var cnt= $("#newMessage_"+userName).html()
         if(cnt==undefined){
@@ -45,7 +49,7 @@ function enterChatRoom(userName){
         }
 
 
-
+     
 
 
 }
@@ -80,7 +84,7 @@ function connectToChat(userName) {
             let usersTemplateHTML = "";
           
             usersTemplateHTML = usersTemplateHTML + 
-                '<a href="#" onclick="selectUser(\'' + data.fromLogin + '\')"><li class="clearfix">\n' +
+                '<a href="#" id="'+data.fromLogin+'"onclick="selectUser(\'' + data.fromLogin + '\')"><li class="clearfix">\n' +
                 '<img  src="/blankShop/img/product/icon.jpg"" width="100px" height="70px" alt="avatar" />\n' +
                 '<div class="about">\n' +
                 '<div id="userNameAppender_' + data.fromLogin + '" class="name">' + data.fromLogin + '</div>\n' +
@@ -89,8 +93,8 @@ function connectToChat(userName) {
                 '</div>\n' +
                 '</div>\n' +
                 '</li></a>';         
-                
-                if(!newMessages.has(data.fromLogin))
+              
+                if($("#"+data.fromLogin).html()==undefined)
                 $('#usersList').append(usersTemplateHTML);
 
                 

@@ -142,7 +142,8 @@
 				<div id="dis1"></div>
 				<div id="dis2"></div>
 			</div>
-			<div  width="400" height="400">
+			<div  width="400" height="400" style="text-align: center;">
+				<h1 >各類商品總銷售:</h1>
 				<canvas id="myChart"></canvas>
 			</div>
 			

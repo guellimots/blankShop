@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.blankShop.model.Product;
@@ -32,5 +33,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	@Query(value = "select productID,productName,sum(soldNumber)soldNumber from Product where productStatus='上架中' group by productID,productName order by productID", nativeQuery = true)
 	public List<Map<String, Object>> getProductChart();
+	@Modifying
+	@Query(value = "UPDATE Product SET productName = ?  WHERE productID=?",nativeQuery = true )
+	public void updateProductName(String productName,Integer productID);
+	
 
 }

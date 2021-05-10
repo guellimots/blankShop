@@ -93,10 +93,11 @@
 <script src="/blankShop/js/backEnd/memberChat/adminchat.js"></script>
 <script>
 $(function(){
+    
     messagesStorage =parent.getMessagesStorage();
     newMessages = parent.getNewMessages();
     var iterator = messagesStorage.keys();
-   
+  
    for(let i = 0;i<messagesStorage.size;i++){
     var userName = iterator.next().value
      enterChatRoom(userName.substring(0,userName.indexOf("_")));

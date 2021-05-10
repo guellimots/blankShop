@@ -350,10 +350,7 @@
 	<!-- jQuery UI 1.11.4 -->
 	<script src="/blankShop/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<<<<<<< HEAD
-=======
 	
->>>>>>> 44c5550fcf53e25763b71b687a47be897c1297c1
 	<script src="/blankShop/js/backEnd/chatroom/checkmessage.js"></script>
 	<script src="/blankShop/js/backEnd/memberChat/admincustom.js"></script>
 	<script src="/blankShop/js/backEnd/memberChat/adminchat.js"></script>

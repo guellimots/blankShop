@@ -38,8 +38,9 @@ function sendMsg(from, text) {
 
 function registration() {
     let userName = document.getElementById("userName").value;
-    $.get(url + "/registration/" + userName, function () {
-        connectToChat(userName);
+    let memberId = document.getElementById("memberId").value;
+    $.get(url + "/registration/" + memberId+"-"+userName, function () {
+        connectToChat(memberId+"-"+userName);
     })
     
     

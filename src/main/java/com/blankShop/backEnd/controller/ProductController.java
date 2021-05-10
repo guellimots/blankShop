@@ -152,11 +152,12 @@ public class ProductController {
 		Map<String, String> msg = new HashMap<>();
 
 		boolean status = service.checkstyle(colorCode, productName, size);
+		
 		if (status)
 			msg.put("msg", "1");
 		else
 			msg.put("msg", "2");
-
+		System.out.println(msg);
 		return msg;
 
 	}

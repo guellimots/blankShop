@@ -38,8 +38,9 @@ function render(message, userName) {
 
 function sendMessage(message) {
     let username = $('#userName').val();
+    let memberId = $('#memberId').val();
     console.log(username)
-    sendMsg(username, message);
+    sendMsg(memberId+"-"+username, message);
     scrollToBottom();
     if (message.trim() !== '') {
         var template = Handlebars.compile($("#message-template").html());

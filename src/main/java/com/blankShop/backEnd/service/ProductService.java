@@ -52,30 +52,34 @@ public class ProductService {
 		Optional<Product> productOptional = productRepository.findById(id);
 		Product prod = productOptional.get();
 		if (productOptional.isPresent()) {
-			product.setProductStatus(prod.getProductStatus());
-			product.setSoldNumber(prod.getSoldNumber());
-			product.setSoldOnSale(prod.getSoldNumber());
+			
+			prod.setSize(product.getSize());
+			prod.setColorCode(product.getColorCode());
+			prod.setGenre(product.getGenre());
+			prod.setPurpose(product.getPurpose());
+			prod.setInMarketDate(product.getInMarketDate());
+			prod.setProductPrice(product.getProductPrice());
+			prod.setSalePrice(product.getSalePrice());
+			prod.setStockNumber(product.getStockNumber());
+			prod.setProductDiscription1(product.getProductDiscription1());
+			prod.setProductDiscription2(product.getProductDiscription2());
+			
 
-			if (product.getMultipartFile1().isEmpty())
-				product.setProductImgDir1(prod.getProductImgDir1());
-			else {
+			if (!product.getMultipartFile1().isEmpty()) {
 				String ImgPath = fileUploadUtils.FileUpload(product.getMultipartFile1(), prod.getTypeId(), 1);
-				product.setProductImgDir1(ImgPath);
+				prod.setProductImgDir1(ImgPath);
 			}
-			if (product.getMultipartFile2().isEmpty())
-				product.setProductImgDir2(prod.getProductImgDir2());
-			else {
+			if (!product.getMultipartFile2().isEmpty()){
 				String ImgPath2 = fileUploadUtils.FileUpload(product.getMultipartFile2(), prod.getTypeId(), 2);
-				product.setProductImgDir2(ImgPath2);
+				prod.setProductImgDir2(ImgPath2);
 			}
-			if (product.getMultipartFile3().isEmpty())
-				product.setProductImgDir3(prod.getProductImgDir3());
-			else {
+			if (!product.getMultipartFile3().isEmpty()) {
 				String ImgPath3 = fileUploadUtils.FileUpload(product.getMultipartFile3(), prod.getTypeId(), 3);
-				product.setProductImgDir3(ImgPath3);
+				prod.setProductImgDir3(ImgPath3);
 			}
+			productRepository.updateProductName(product.getProductName(),product.getProductID());
 
-			productRepository.save(product);
+			
 			return true;
 		}
 		return false;
@@ -154,8 +158,8 @@ public class ProductService {
 		Optional<Product> product = productRepository.findByColorCodeAndProductNameAndSize(colorCode, productName,
 				size);
 		if (product.isPresent())
-			return false;
-
+		return false;
+		else
 		return true;
 
 	}
