@@ -37,11 +37,14 @@ public class Member {
 	
 	private Date createDate;
 	
-	@Transient
-	private String googleImgUrl;
+//	@Transient
+//	private String googleImgUrl;
 	
 	@OneToMany(mappedBy="member",fetch = FetchType.LAZY)
 	private Set<Orders> orders;
+	
+	@OneToMany(mappedBy="member",fetch = FetchType.LAZY)
+	private Set<Review> reviews;
 	
 	public Integer getMemberId() {
 		return memberId;
@@ -123,13 +126,23 @@ public class Member {
 		this.orders = orders;
 	}
 
-	public String getGoogleImgUrl() {
-		return googleImgUrl;
+//	public String getGoogleImgUrl() {
+//		return googleImgUrl;
+//	}
+//
+//	public void setGoogleImgUrl(String googleImgUrl) {
+//		this.googleImgUrl = googleImgUrl;
+//	}
+
+	public Set<Review> getReviews() {
+		return reviews;
 	}
 
-	public void setGoogleImgUrl(String googleImgUrl) {
-		this.googleImgUrl = googleImgUrl;
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
 	}
+	
+	
 	
 	
 	
