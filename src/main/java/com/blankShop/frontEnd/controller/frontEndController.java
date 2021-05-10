@@ -535,7 +535,7 @@ public class frontEndController {
 			Member mb, Model model ) throws IOException {
 		String result11= "";
 		System.out.println(email);
-		
+			
 		// 判斷email是否有註冊過
 		if (memberService.checkMemberbyEmail(email)) {
 			 result11 = "fail";
@@ -543,13 +543,13 @@ public class frontEndController {
 //			Map<String, String> errormsg = new HashMap<String, String>();
 //			errormsg.put("msg", "此信箱已經註冊過、請重新輸入");
 //			model.addAttribute("errormsg", errormsg);
-			return "redirect:/frontEnd/tranToRegister";
+			return "redirect:/frontEnd/tranToRegister?status=fail";
 		} else {
 				//上傳預設圖片
 				byte[] originalImgByte=null;						
 				BufferedImage bufferedImage;
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
+					
 				try {
 					
 					Resource resource = resourceLoader.getResource(noImage); 	
@@ -571,7 +571,8 @@ public class frontEndController {
 			mb.setPassword(password);
 		
 			memberService.save(mb);
-			return "redirect:/frontEnd/loginPage";
+			
+			return "redirect:/frontEnd/tranToRegister?status=good";
 		}
 	}
 
@@ -608,16 +609,22 @@ public class frontEndController {
 	@PostMapping(value = "/editMember")
 	public String editMember(@RequestParam Integer id, @RequestParam String memberName, @RequestParam String cellNumber,
 			@RequestParam Date birthday, @RequestParam String address, @RequestParam String email,
-			@RequestParam("fileupload") MultipartFile multipartFile, Model m) throws IOException {
+			@RequestParam("fileupload") MultipartFile multipartFile, Model m, HttpSession session) throws IOException {
 
 		String result = "";
 		
 		Member member = memberService.getMemberbyEmail(email);
 		byte[] picture = multipartFile.getBytes();
+		
 		if (picture.length == 0) {
 			result = "good";
 		} else {
 			member.setProfileImg(multipartFile.getBytes());
+			byte[] base64 = Base64Utils.encode(multipartFile.getBytes());
+			String strbase64 = new String(base64);
+			session.setAttribute("proImgSrc", "data:image/png;base64," + strbase64);
+			
+			
 			result = "good";
 		}
 		if (memberName.equals("") == false) {
@@ -644,7 +651,7 @@ public class frontEndController {
 		m.addAttribute("Member", member);
 		return "redirect:/frontEnd/showmem";
 	}
-
+			
 	// 單獨修改密碼功能
 	@PostMapping("/editpassword")
 	public String editpassword(@RequestParam Integer id, @RequestParam(name = "new-pwd") String password,

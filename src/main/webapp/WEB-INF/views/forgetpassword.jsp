@@ -13,8 +13,11 @@
         <title>Forget password</title>
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="/blankShop//blankShop/assets/img/favicon.png">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- CSS============================================ -->
+
+
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="/blankShop/assets/css/bootstrap.min.css">
@@ -166,8 +169,8 @@
                                                     </h4>
                                                 </div>
                                                 <div class="shopping-cart-btn btn-hover text-center">
-                                                    <a class="default-btn" href="#">結帳</a> <a
-                                                        class="default-btn" href="#">檢視購物車</a>
+                                                    <a class="default-btn" href="#">結帳</a> <a class="default-btn"
+                                                        href="#">檢視購物車</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,40 +184,40 @@
                     </div>
                 </div>
             </header>
-            <div class="d-flex align-items-center light-blue-gradient" style="height: 100vh;">
+
+            <div class="login-register-area pt-100 pb-100">
                 <div class="container">
-                    <div class="d-flex justify-content-center">
-                        <div class="col-md-7">
-                            <div class="card rounded-0 shadow">
-                                <div class="card-body">
-                                    <h3>忘記密碼了嗎?</h3>
-                                    <form action="sendEmail" method="Post">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email address:</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                                            <small id="emailHelp"
-                                                class="form-text text-muted">請輸入您的e-mail，並到您的信箱點選連結重設您的密碼。</small>
+                    <div class="row">
+
+                        <div class="col-lg-8 col-md-12 ml-auto mr-auto">
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <div class="login-register-wrapper">
+                                        <div class="login-register-form">
+                                            <h3>忘記密碼了嗎?</h3>
+                                            <form action="sendEmail" method="Post">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Email address:</label>
+                                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                                        name="email" aria-describedby="emailHelp"
+                                                        placeholder="Enter email">
+                                                    <small id="emailHelp"
+                                                        class="form-text text-muted">請輸入您的e-mail，並到您的信箱點選連結重設您的密碼。</small>
+                                                </div>
+                                                
+                                                    <button type="submit" id="resetpassword"
+                                                        class="btn btn-secondary" >送出</button>
+                                               
+                                            </form>
                                         </div>
-                                        <button type="submit"  id="resetpassword" class="btn btn-primary">送出</button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Optional JavaScript -->
-                    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                        crossorigin="anonymous"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                        crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                        crossorigin="anonymous"></script>
                 </div>
             </div>
+
             <footer class="footer-area bg-paleturquoise">
                 <div class="container">
                     <div class="footer-top text-center pt-45 pb-45">
@@ -255,24 +258,24 @@
             </footer>
 
         </div>
-    <script>
-        $("#resetpassword").click(function(){
-            swal("請至您的信箱重設密碼","","success",{button:'確定'});
-        })
-    
-    </script>
-        	<!-- jQuery JS -->
-	<script src="/blankShop/assets/js/vendor/jquery-1.12.4.min.js"></script>
-	<!-- Popper JS -->
-	<script src="/blankShop/assets/js/popper.min.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="/blankShop/assets/js/bootstrap.min.js"></script>
-	<!-- Plugins JS -->
-	<script src="/blankShop/assets/js/plugins.js"></script>
-	<!-- Ajax Mail -->
-	<script src="/blankShop/assets/js/ajax-mail.js"></script>
-	<!-- Main JS -->
-	<script src="/blankShop/assets/js/main.js"></script>
+        <script>
+            $("#resetpassword").click(function () {
+                swal("請至您的信箱重設密碼", "", "success", { button: '確定' });
+            })
+
+        </script>
+        <!-- jQuery JS -->
+        <script src="/blankShop/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <!-- Popper JS -->
+        <script src="/blankShop/assets/js/popper.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="/blankShop/assets/js/bootstrap.min.js"></script>
+        <!-- Plugins JS -->
+        <script src="/blankShop/assets/js/plugins.js"></script>
+        <!-- Ajax Mail -->
+        <script src="/blankShop/assets/js/ajax-mail.js"></script>
+        <!-- Main JS -->
+        <script src="/blankShop/assets/js/main.js"></script>
     </body>
 
     </html>

@@ -226,7 +226,7 @@
                 <div class="container">
                     <div class="breadcrumb-content text-center">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="/blankShop/frontEnd/index">Home</a></li>
                             <li class="active">註冊</li>
                         </ul>
                     </div>
@@ -261,7 +261,7 @@
                                                         name="user-password" placeholder="Password"
                                                         onblur=checkPassword()> <span id="verifyPasswordResult"></span>
                                                     <P>1.不可空白 2.至少6個字且必須包含英文字母、數字、特殊字元(!@#$%^&*)</P>
-                                                    <span>"${alertmsg}"</span>
+                                                    
 
                                                     <div class="button-box">
                                                         <button id="btn1" type="submit">註冊</button>
@@ -415,32 +415,36 @@
             }
             //一鍵輸入
             $("#oneClickInput").click(function () {
-                $("#user-name").val("王曉明");
+                $("#user-name").val("王小明");
                 $("#password").val("12@abc");
                 $("#user-email").val("123@gmail.com");
 
             });
             
-            $('#btn1').mousedown(function () {
-                var 
+            // $('#btn1').mousedown(function () {
               
+				
                     
                 if ("fail" == "${alertmsg}"){
                     
                     swal("帳號已經註冊過", "", "error", { button: '確定', timer: 2000 });
-                    setTimeout(function () { $('#send1').submit(); }, 2000);
+                   // setTimeout(function () { $('#send1').submit(); }, 2000);
 
-                    abc = "";
                 }
                 if ("good"=="${alertmsg}")
                     {
                     swal("註冊成功", "", "success", { button: '確定', timer: 2000 });
-                    setTimeout(function () { $('#send1').submit(); }, 2000);
-                    abc = "";
+                    setTimeout(function () { 
+						$('#send1').submit(); 
+						window.location.href='/blankShop/frontEnd/loginPage';
+					}, 2000);
+					
+					//url("/frontEnd/loginPage")
+              
                 }
+				
 
-
-            })
+            // })
         </script>
 
         <!-- jQuery JS -->
