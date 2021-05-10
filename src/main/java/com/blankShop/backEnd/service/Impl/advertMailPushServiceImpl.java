@@ -42,7 +42,7 @@ public class advertMailPushServiceImpl implements advertMailPushService {
 			helper.setFrom(mail.getFrom());
 			helper.setSubject(mail.getSubject());
 			helper.setText(mail.getContent()+"<br>"+"<html><body><img src='cid:image'></body></html>",true);
-			FileSystemResource res = new FileSystemResource(new File("C:\\Users\\董佳樺\\OneDrive\\Pictures\\"+strbase64));
+			FileSystemResource res = new FileSystemResource(new File("C:\\blankShop_demo\\blankshop_advertisting\\"+strbase64));
 			helper.addInline("image", res);
 			javaMailSender.send(mg);	
 		}catch(MessagingException e) {

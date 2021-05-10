@@ -359,6 +359,7 @@
 					<div class="col-lg-6 col-md-12">
 						<div class="product-details-content ml-30 responsive-mrg">
 						    <input type="hidden" id="productID" value="${product.productID}"/>
+							<input type="hidden" id="memberId" value="${sessionScope.memberId}"/>
 							<h2>${product.productName}</h2>
 							<div class="product-details-price">
 								<span>${product.salePrice} </span> <span class="old">${product.productPrice}</span>
@@ -500,7 +501,7 @@
 								</div>
 								<div id="des-details2" class="tab-pane">
 									<div class="review-wrapper">
-										<div class="single-review">
+										<%-- <div class="single-review">
 											<div class="review-img">
 												<img
 													src="/blankShop/assets/img/product-details/client-1.jpg"
@@ -553,29 +554,29 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> --%>
 									</div>
 									<div class="ratting-form-wrapper">
 										<p>
 											評論送出將不會顯示您的email。 <span>(*)</span>為必填欄位
 										</p>
 										<div class="ratting-form">
-											<form action="#">
+											<form action="#" id="reviewForm">
 												<div class="row">
 													<div class="col-md-12">
 														<div class="rating-form-style mb-20">
 															<label>您的評論 <span>*</span></label>
-															<textarea name="Your Review"></textarea>
+															<textarea name="Your Review" id="review"></textarea>
 														</div>
 													</div>
 													<div class="col-md-12">
 														<div class="rating-form-style mb-20">
-															<label>姓名 <span>*</span></label> <input type="text">
+															<label>姓名 <span>*</span></label> <input type="text" id="name">
 														</div>
 													</div>
 													<div class="col-md-12">
 														<div class="rating-form-style mb-20">
-															<label>Email <span>*</span></label> <input type="email">
+															<label>Email <span>*</span></label> <input type="email" id="email">
 														</div>
 													</div>
 													<div class="col-lg-12">
@@ -657,6 +658,7 @@
 	<script src="/blankShop/assets/js/main.js"></script>
 	<script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
 	<script src="/blankShop/assets/js/header.js"></script>
+	<script src="/blankShop/assets/js/review.js"></script>
 
 	
 
@@ -734,7 +736,7 @@
                 if((size==null)||(colorCode==null)){
 					Swal.fire({
 						icon:'error',
-						text:'請選取顏色數量'
+						text:'請選取顏色、尺寸'
 					});
 
 				}else{

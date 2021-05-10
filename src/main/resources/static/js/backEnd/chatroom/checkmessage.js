@@ -27,23 +27,22 @@ $(document).ready(function(){
     }
 
     const onMessageReceived3 = (payload) => {
-        const message2 = JSON.parse(payload.body);
-        $("#msginf").html("!")
-        $("#usergroup").html("  群組聯繫&emsp;<i id='circleOnline' class='fa fa-circle online'></i>")
-        if(username+" 上線" == message2.sender+" 上線"){
+        const message = JSON.parse(payload.body);
+ 
+        if(username+" 上線" == message.sender+" 上線"){
             $("#msginf").html("")
             $("#circleOnline").remove();
-        // }else if(username+" 上線" != message2.sender+" 上線"){
-        //     $("#msginf").html("")
-        //     $("#circleOnline").remove();
-        // }
+        }else if(message.content != null){
+            $("#msginf").html("!")
+            $("#usergroup").html("  群組聯繫&emsp;<i id='circleOnline' class='fa fa-circle online'></i>")
+        }else if(username+" 上線" != message.sender+" 上線"){
+            $("#msginf").html("!")
+            $("#usergroup").html("  群組聯繫&emsp;<i id='circlewarning' class='fa fa-user'></i>")
+        }else{
+            $("#msginf").html("")
+            $("#circleOnline").remove();
+        }
         
     }
-    
-    $("#group").on('click',function() {
-        $("#msginf").html("")
-        $("#circleOnline").remove();
-    });
-
 
 })

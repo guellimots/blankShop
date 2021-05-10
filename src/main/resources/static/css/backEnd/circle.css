@@ -5,6 +5,14 @@
     font-size: 10px;
 }
 
+.far.fa-circle{
+    color: #B0E0E6;
+}
+
+.fa.fa-user{
+    color:#FF8C00;
+}
+
 .online {
     color: #86BB71;
 }

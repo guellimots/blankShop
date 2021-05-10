@@ -7,18 +7,15 @@
 <meta name="keywords" content="html,css,javascript,bootstrap4,jquery,jquery-ui">
 <meta name="description" content="EDU 第一組期末專題專案">
 <!-- websocket -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
-    <!--    libs for stomp and sockjs-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+<!--    libs for stomp and sockjs-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 
-    <!--    end libs for stomp and sockjs-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
-          type="text/css">
-    <link href="/blankShop/css/backEnd/circle.css" rel="stylesheet">
-
-
+<!--    end libs for stomp and sockjs-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+<link href="/blankShop/css/backEnd/circle.css" rel="stylesheet">
 
 
 <title>BlankShop 後臺管理系統</title>
@@ -350,10 +347,7 @@
 	<!-- jQuery UI 1.11.4 -->
 	<script src="/blankShop/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<<<<<<< HEAD
-=======
-	
->>>>>>> 44c5550fcf53e25763b71b687a47be897c1297c1
+
 	<script src="/blankShop/js/backEnd/chatroom/checkmessage.js"></script>
 	<script src="/blankShop/js/backEnd/memberChat/admincustom.js"></script>
 	<script src="/blankShop/js/backEnd/memberChat/adminchat.js"></script>

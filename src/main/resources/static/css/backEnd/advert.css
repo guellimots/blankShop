@@ -11,19 +11,14 @@ body {
 }
 
 form {
-  width: 1000px;
-  margin: auto;
   margin-top: 50px;
-  margin-left: 650px;
-  margin-right: 500px;
-  margin-bottom: 250px;
 }
 
-.col-md-12 {
+/* .col-md-12 {
   height: 100vh;
   width: 100vw;
   display:inline;
   justify-content: center;
   align-items: center;
-}
+} */
 

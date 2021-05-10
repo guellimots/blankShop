@@ -62,8 +62,13 @@ $(document).ready(function(){
     // 取得socket回傳資料，並同時新增eleement以及顯示訊息
     const onMessageReceived2 = (payload) => {
         const message = JSON.parse(payload.body);
-        $("#msginf").html("!")
-        $("#usergroup").html("  群組聯繫&emsp;<i id='circleOnline' class='fa fa-circle online'></i>")
+
+        if(message.content != null){
+            $("#msginf").html("!")
+            $("#usergroup").html("  群組聯繫&emsp;<i id='circleOnline' class='fa fa-circle online'></i>")
+        }
+
+        
         const chatCard = document.createElement('div')
         chatCard.className = 'card-body'
 
