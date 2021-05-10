@@ -2,7 +2,6 @@
  * 
  */
 
-
 $(document).ready(function(){
     checkemp()
 
@@ -22,6 +21,7 @@ $(document).ready(function(){
                         $("#findemp").hide();
                         $("#annousment").hide();
                         $("#UpButton").hide();
+                        $("#data").hide();
                     }
 					
 				}

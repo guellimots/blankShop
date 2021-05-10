@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="html,css,javascript,bootstrap4,jquery,jquery-ui">
 <meta name="description" content="EDU 第一組期末專題專案">
+<link rel="shortcut icon" type="image/x-icon" href="/blankShop/assets/img/favicon.png">
+
 <!-- websocket -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
@@ -347,7 +349,6 @@
 	<!-- jQuery UI 1.11.4 -->
 	<script src="/blankShop/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-
 	<script src="/blankShop/js/backEnd/chatroom/checkmessage.js"></script>
 	<script src="/blankShop/js/backEnd/memberChat/admincustom.js"></script>
 	<script src="/blankShop/js/backEnd/memberChat/adminchat.js"></script>
@@ -365,7 +366,6 @@
 			$("#circleOnline").remove();
 			})	
 
-
 			getuser()
 			postID();
 			var empID
@@ -382,10 +382,6 @@
 			}
 		})
 	</script>
-
-
-
-
 	<!-- Bootstrap 4 -->
 	<script src="/blankShop/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- overlayScrollbars -->
@@ -398,8 +394,5 @@
 	<script src="/blankShop/js/backEnd/order/findorderDailyItem.js"></script>
 	<script src="/blankShop/js/backEnd/showmessage.js"></script>
 	<script src="/blankShop/js/backEnd/adminindex.js"></script>
-
-
-
 </body>
 </html>

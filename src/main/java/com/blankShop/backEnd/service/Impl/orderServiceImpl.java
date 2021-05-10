@@ -22,6 +22,7 @@ public class orderServiceImpl implements orderService {
 	@Autowired
 	AdvertMailRepository AMRepository;
 	
+	
 	Logger logger = LogManager.getLogger(getClass());
 	
 	@Override
