@@ -230,7 +230,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                             <form action="#">
                                 <div class="table-content table-responsive cart-table-content">
-                                    <table style="width: 1200px;">
+                                    <table style="width: 1250px;">
                                         <thead>
                                             <tr>
                                                 <th>產品圖片</th>
@@ -249,8 +249,9 @@
 
                                     </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
+                                
+                                <div class="d-flex justify-content-between">
+                                    <div class="">
                                         <div class="cart-shiping-update-wrapper">
                                             <div class="cart-shiping-update">
                                                 <a href="/blankShop/frontEnd/welcomePage">繼續購物</a>
@@ -258,7 +259,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-8 col-md-12 justify-content-end">
+                                    <div class="col-3">
                                         <div class="grand-totall">
 
                                             <h4 class="grand-totall-title">總金額 <span id="summary"></span><span>$</span>

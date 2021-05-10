@@ -207,6 +207,7 @@
                                                 
                                                     <button type="submit" id="resetpassword"
                                                         class="btn btn-secondary" >送出</button>
+                                                    <button type="button" id="btn1" class="btn btn-secondary">我是一鍵輸入</button>
                                                
                                             </form>
                                         </div>
@@ -262,7 +263,10 @@
             $("#resetpassword").click(function () {
                 swal("請至您的信箱重設密碼", "", "success", { button: '確定' });
             })
-
+            $("#btn1").click(function(){
+                $("#exampleInputEmail1").val("blankshopcompany@gmail.com");
+            })
+           
         </script>
         <!-- jQuery JS -->
         <script src="/blankShop/assets/js/vendor/jquery-1.12.4.min.js"></script>

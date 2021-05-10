@@ -57,19 +57,20 @@
 							<div class="col-lg-6">
 								<div class="single-input-item">
 									<label for="new-pwd" class="required">新密碼</label> <input
-										type="text" id="pwd" name="new-pwd" />
+										type="password" id="pwd" name="new-pwd" />
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="single-input-item">
 									<label for="confirm-pwd" class="required">密碼確認</label> <input
-										type="text" id="checkPwd" name="confirm-pwd" /> <span
+										type="password" id="checkPwd" name="confirm-pwd" /> <span
 										id="checkPwdMsg"></span>
 								</div>
 							</div>
 						</div>
 						<hr>
 						<button type="submit" class="btn btn-secondary">修改密碼</button>
+						<button type="button" class="btn btn-secondary" id="btn1">我是一鍵輸入</button>
 					</form>
 				</div>
 			</div>
@@ -98,9 +99,15 @@
 			} else if ($("#pwd").val() != $("#checkPwd").val()) {
 				$("#checkPwdMsg").text("密碼不相符,請再次輸入").show();
 			} else {
-				$("#checkPwdMsg").text("一樣").show();
+				$("#checkPwdMsg").text("密碼相符").show();
 			}
 		}
+
+		
+		$("#btn1").click(function(){
+			$("#pwd").val("qwe123!");
+			$("#checkPwd").val("qwe123!");
+		})
 	</script>
 </body>
 
