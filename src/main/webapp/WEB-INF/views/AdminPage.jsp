@@ -21,7 +21,7 @@
     <!--    end libs for stomp and sockjs-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
           type="text/css">
-    <link href="/blankShop/css/backEnd/adminstyle.css" rel="stylesheet">
+    <link href="/blankShop/css/backEnd/circle.css" rel="stylesheet">
 
 
 
@@ -361,7 +361,7 @@
 	<!-- jQuery UI 1.11.4 -->
 	<script src="/blankShop/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-	<script src="/blankShop/js/backEnd/chatroom/chat.js"></script>
+	
 	<script src="/blankShop/js/backEnd/chatroom/checkmessage.js"></script>
 	<script src="/blankShop/js/backEnd/memberChat/admincustom.js"></script>
 <script src="/blankShop/js/backEnd/memberChat/adminchat.js"></script>
