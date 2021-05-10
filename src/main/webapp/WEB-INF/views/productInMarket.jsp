@@ -453,17 +453,38 @@
 
 		
 			function showProductChart(datachart){
+				var colorSet = [ 
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)'
+						]
+						var colorBorderSet = [
+							'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)',
+							'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)',
+							'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)'
+						]
 				var chartlabels = [];
 				var chartdata = [];
 				var backgroundColor = [];
 				var borderColor = [];
 				var ctx = document.getElementById('myChart').getContext('2d');
-				
-				for(let i = 0 ; i <datachart.length;i++){
+			
+				for(let i = 0,j=0; i <datachart.length;i++,j++){
 					chartlabels.push(datachart[i].productName)
 					chartdata.push(datachart[i].sum)
-
+					backgroundColor.push(colorSet[j])
+					borderColor.push(colorBorderSet[j])
+				
+					if(j==5)
+					j=0;
 				}
+				
 				if(myChart!=undefined)
 					myChart.destroy()
 					
@@ -477,22 +498,8 @@
 					datasets: [{
 						label: '銷售量',
 						data: chartdata,
-						backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 159, 64, 0.2)'
-						],
-						borderColor: [
-							'rgba(255, 99, 132, 1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							'rgba(75, 192, 192, 1)',
-							'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)'
-						],
+						backgroundColor:backgroundColor,
+						borderColor: borderColor,
 						borderWidth: 1
 					}]
 				},
