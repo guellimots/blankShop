@@ -41,6 +41,7 @@
 				<div class="single-input-item">
 					<br>
 					<h3>重設密碼</h3>
+					<hr>
 					<form action="resetPwdController" method="post">
 						<input type="hidden" name="id" value="${MemberBean.memberId}">
 						<div class="row">
@@ -67,7 +68,8 @@
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="check-btn sqr-btn">修改密碼</button>
+						<hr>
+						<button type="submit" class="btn btn-secondary">修改密碼</button>
 					</form>
 				</div>
 			</div>

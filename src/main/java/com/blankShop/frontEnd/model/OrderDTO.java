@@ -56,7 +56,6 @@ public class OrderDTO {
 		this.orderStatus = orderStatus;
 	}
 	public String getCreateDate() {
-		System.out.println(createDate+"++++++++++++++++++++++++++++");
 	 SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");                            
 	  String rightdate = sdFormat.format(createDate);
 		return rightdate;

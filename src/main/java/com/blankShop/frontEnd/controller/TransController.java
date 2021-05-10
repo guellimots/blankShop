@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.blankShop.frontEnd.service.ProductService;
 import com.blankShop.model.Product;
@@ -94,9 +95,14 @@ public class TransController {
 	}
 	//註冊頁面
 	@GetMapping("/tranToRegister")
-	public String register(Model m) {
-		m.addAttribute("alertmsg","cantUse");
-		m.addAttribute("firstTime","first");
+	public String register(@RequestParam(required = false) String status, Model m) {
+		if ("fail".equals(status)) 
+		m.addAttribute("alertmsg","fail");
+		else if("good".equals(status))
+		m.addAttribute("alertmsg","good");	
+		else	
+		m.addAttribute("alertmsg","");
+		//m.addAttribute("firstTime","first");
 		return "register";
 	}
 
