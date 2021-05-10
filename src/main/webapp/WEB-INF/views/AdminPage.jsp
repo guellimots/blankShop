@@ -83,11 +83,12 @@
 					data-toggle="dropdown" href="#"> <i class="far fa-bell"></i> <span
 						class="badge badge-warning navbar-badge" id="warncnt"></span>
 				</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					<div  style="text-align: center;" class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 					
 						<div class="dropdown-divider"></div>
-						<a id="warnMsg" href="/blankShop/backEnd/viewProductNotification"
-							class="dropdown-item"> </a>
+						<a  href="/blankShop/backEnd/viewProductNotification"
+							class="dropdown-item">產品庫存警告</a>
+							<span id="warnMsg"></span>
 					</div></li>
 					<form action="/bakcEnd/logout">
 						<li class="nav-item dropdown"><a class="navbar-brand"

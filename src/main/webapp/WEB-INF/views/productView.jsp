@@ -114,7 +114,7 @@
 					font-size: 50px;
 					
 				}
-				#up-product{
+				#up-product,#previewDialog{
 					visibility: hidden;
 				}
 				
@@ -248,7 +248,7 @@
 						
 
 						<label for="stockNumber">庫存:</label>
-						<input required type="number" min="0" name="stockNumber" value="0" class="text ui-widget-content ui-corner-all">
+						<input required type="number" id = "createStock"min="0" name="stockNumber" value="0" class="text ui-widget-content ui-corner-all">
 
 						<label for="productDiscription1">產品描述1:</label> 
 						<textarea id="snpd1" name="productDiscription1">  </textarea>
@@ -406,10 +406,18 @@
 			$(function () {
 				
 
-					$('#snpd1').summernote();
-					$('#snpd2').summernote();
-					$('#editsnpd1').summernote();
-					$('#editsnpd2').summernote();
+					$('#snpd1').summernote({
+						dialogsInBody: true
+					});
+					$('#snpd2').summernote({
+						dialogsInBody: true
+					});
+					$('#editsnpd1').summernote({
+						dialogsInBody: true
+					});
+					$('#editsnpd2').summernote({
+						dialogsInBody: true
+					});
 
 					
 					$('#productTable').DataTable({
@@ -636,7 +644,9 @@
 						"新增": createProduct,
 						"取消": function () {
 							createDialog.dialog("close");
-						}
+						
+						},
+						"快速輸入": oneClick
 					},
 					close: function () {
 						
@@ -710,6 +720,7 @@
 				else{
 					createDialog.dialog("open");
 					createDialog.dialog( "option", "maxWidth", 900 );
+					selectboxRresh()
 					$('#selectNewId').hide()
 					$('#selectNewIdName').hide()
 					
@@ -855,6 +866,7 @@
 					//滑動預覽圖片
 					var preSelectId ;
 					$('#previewDialog').on('mouseenter',function(){
+						
 						previewDialog.dialog("open");
 						previewDialog.dialog( "option", "maxWidth", 900 );
 
@@ -871,7 +883,7 @@
 					
 					$('#productTable').on('mouseenter','tbody tr td:nth-child(2)',function () {	
 						preSelectId = $(this).parent().attr("id")
-					
+						$("#previewDialog").css("visibility","visible")
 						
 						previewDialog.dialog("open");
 						previewDialog.dialog( "option", "maxWidth", 900 );
@@ -1254,6 +1266,28 @@
 
 
 								}
+								
+
+								function oneClick(){
+									$("#selectNewName").val("反光印花T恤");
+									$("#selectproductPrice").val(1280);
+									$("#createStock").val(12);
+									$("#selectDate").val("2021-05-14");
+									$("#snpd2").summernote("code","<ul><li>手洗不可漂白"+
+																	"<li>不可烘乾"+
+																	"<li>低溫隔布熨燙"+
+																	"<li>在陰影下平晾陰乾"+
+																	"<li>請勿浸泡"+
+																	"<li>避免深淺色混合洗滌"+
+																	"<li>反面洗滌")
+									$("#snpd1").summernote("code","圓領／背面印花／寬鬆版型<br>"+
+																	"93.5%Cotton／6.5%Spandex<br>"+
+																	"Made in China")
+							
+
+								}
+
+								
 
 					
 			});

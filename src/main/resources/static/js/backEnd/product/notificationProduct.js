@@ -54,8 +54,8 @@
                         
                 $("#warncnt").html(JsonData.length)
                 
-                $("#warnMsg").html("<i class='fa fa-exclamation-triangle' aria-hidden='true'></i>&emsp;"
-                +JsonData.length+"項商品即將沒有存貨!!<br>"+list+"see more information...");
+                $("#warnMsg").html(list);
+             
 
             }
 
