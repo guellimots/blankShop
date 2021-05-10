@@ -57,8 +57,8 @@ public class OrderDTO {
 	}
 	public String getCreateDate() {
 	 SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");                            
-	  String rightdate = sdFormat.format(createDate);
-		return rightdate;
+	 String rightdate = sdFormat.format(createDate);
+	 return rightdate;
 	}
 	public void setCreateDate(Date createDate) {
 		

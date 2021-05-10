@@ -95,6 +95,7 @@ $(document).ready(function() {
 				swal("更新成功","","success",{button:"確定"})
 				//				table.clear().draw()
 				$("#updateform")[0].reset()
+				$("#updateOrder").hide();
 				table.ajax.reload()
 			},
 			error: function() {

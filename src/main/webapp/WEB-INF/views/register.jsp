@@ -416,8 +416,8 @@
             //一鍵輸入
             $("#oneClickInput").click(function () {
                 $("#user-name").val("王小明");
-                $("#password").val("12@abc");
-                $("#user-email").val("123@gmail.com");
+                $("#password").val("123qwe!");
+                $("#user-email").val("blankshopcompany@gmail.com");
 
             });
             

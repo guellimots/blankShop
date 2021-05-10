@@ -53,9 +53,11 @@ import com.blankShop.frontEnd.model.priceComparator;
 import com.blankShop.frontEnd.service.MemberService;
 import com.blankShop.frontEnd.service.OrderService;
 import com.blankShop.frontEnd.service.ProductService;
+import com.blankShop.frontEnd.service.ReviewService;
 import com.blankShop.frontEnd.service.advertisingService;
 import com.blankShop.model.Member;
 import com.blankShop.model.Product;
+import com.blankShop.model.Review;
 import com.blankShop.model.advertising;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -80,6 +82,9 @@ public class frontEndController {
 
 	@Autowired
 	ProductService pdService;
+	
+	@Autowired
+	ReviewService rvService;
 	
 	@Autowired
 	ResourceLoader resourceLoader;
@@ -199,23 +204,31 @@ public class frontEndController {
 
 			String email = payload.getEmail();
 			String name = (String) payload.get("name");
-			String pictureUrl = (String) payload.get("picture");
+//			String pictureUrl = (String) payload.get("picture");
 
 			session.setAttribute("name", name);
 			session.setAttribute("email", email);
-			session.setAttribute("proImgSrc", pictureUrl);
+//			session.setAttribute("proImgSrc", pictureUrl);
 
 			// save the member Info if the email does not exist in the database
 			if (memberService.checkMemberbyEmail(email) == false) {
 				Member member = new Member();
 				member.setMemberName(name);
 				member.setEmail(email);
-				member.setGoogleImgUrl(pictureUrl);
+//				member.setGoogleImgUrl(pictureUrl);
 				memberService.save(member);
 			}
 
 			Member memberNew = memberService.getMemberbyEmail(email);
 			session.setAttribute("memberId", memberNew.getMemberId());
+			
+			if (memberNew.getProfileImg() != null) {
+				byte[] base64 = Base64Utils.encode(memberNew.getProfileImg());
+				String strbase64 = new String(base64);
+				session.setAttribute("proImgSrc", "data:image/png;base64," + strbase64);
+			} else {
+				session.setAttribute("proImgSrc", "/blankShop/assets/img/no-image.png");
+			}
 
 			return "success";
 		}
@@ -234,6 +247,7 @@ public class frontEndController {
 		return new ResponseEntity<byte[]>(adImg, headers, HttpStatus.OK);
 
 	}
+	
 
 	@GetMapping("/products/setIndex/{index}")
 	public String setProductDisplayIndex(@PathVariable Integer index, Model m) {
@@ -525,6 +539,12 @@ public class frontEndController {
 		
 		return imgList;
 		
+	}
+	
+	@GetMapping("/product/reviews/{productId}")
+	public @ResponseBody List<Review> loadReviews(@PathVariable Integer productId) {	
+		List<Review> reviews=rvService.findByProductId(productId);
+		return reviews;
 	}
 	
 	@GetMapping("/orders")

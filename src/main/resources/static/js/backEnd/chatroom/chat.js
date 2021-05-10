@@ -62,8 +62,13 @@ $(document).ready(function(){
     // 取得socket回傳資料，並同時新增eleement以及顯示訊息
     const onMessageReceived2 = (payload) => {
         const message = JSON.parse(payload.body);
-        $("#msginf").html("!")
-        $("#usergroup").html("  群組聯繫&emsp;<i id='circleOnline' class='fa fa-circle online'></i>")
+
+        if(message.content != null){
+            $("#msginf").html("!")
+            $("#usergroup").html("  群組聯繫&emsp;<i id='circleOnline' class='fa fa-circle online'></i>")
+        }
+
+        
         const chatCard = document.createElement('div')
         chatCard.className = 'card-body'
 
@@ -76,17 +81,11 @@ $(document).ready(function(){
         const flexBox = document.createElement('div')
         flexBox.className = 'd-flex justify-content-end mb-4'
         flexBox.setAttribute('id','flexbox');
-        // if(username != message.sender){
-        //      flexBox.style.cssText='float:left'
-        // }
         chatCard.appendChild(flexBox)
 
         //新增時間區塊(flexBox2)
         const flexBox2 = document.createElement('span')
         flexBox2.className = 'd-flex justify-content-end mb-time'
-        // if(username != message.sender){
-        //     flexBox2.style.cssText='float:left'
-        // }
         chatCard.appendChild(flexBox2)
 
 
@@ -136,25 +135,23 @@ $(document).ready(function(){
                         type: "GET",
                         contentType: 'application/json; charset=utf-8',
                         success: function(data) {
-                            if(data!=""){
-                                const imgElement = document.createElement('img')
-                                const nameElement = document.createElement('span')
-                                const nameText = document.createTextNode(message.sender)
+                            const imgElement = document.createElement('img')
+                            const nameElement = document.createElement('span')
+                            const nameText = document.createTextNode(message.sender)
+                            if(data!=""){                               
                                 imgElement.setAttribute("id","personImgs")
                                 imgElement.setAttribute("src","data:image/jpeg;base64,"+ data)
                                 imgElement.style.cssText = 'width:40px;hight:40px;border-radius:60%;'
                                 nameElement.style.cssText ='font-size: 10px; text-align: center;'                              
-                                nameElement.appendChild(nameText);
-                                avatarContainer.appendChild(nameElement);
-                                avatarContainer.appendChild(imgElement);
                             }else{
-                                const avatarElement = document.createElement('span')
-                                avatarElement.className = 'circle user_img_msg'
-                                const avatarText = document.createTextNode(message.sender[0])
-                                avatarElement.appendChild(avatarText);
-                                avatarElement.style['background-color'] = getAvatarColor(message.sender)
-                                avatarContainer.appendChild(avatarElement)
-                            }                           
+                                imgElement.setAttribute("id","personImgs")
+                                imgElement.setAttribute("src","/blankShop/img/backEnd/unknow_male.jpg"+ data)
+                                imgElement.style.cssText = 'width:40px;hight:40px;border-radius:60%;'
+                                nameElement.style.cssText ='font-size: 10px; text-align: center;'
+                            }
+                            nameElement.appendChild(nameText);
+                            avatarContainer.appendChild(nameElement);
+                            avatarContainer.appendChild(imgElement);                           
                         }
                 })
             }            

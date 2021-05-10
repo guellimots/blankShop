@@ -40,17 +40,19 @@
 <!-- Modernizer JS -->
 <script src="/blankShop/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
 	<div class="wrapper">
 		<header class="header-area sticky-bar">
+			<input type="hidden" id="urlIndex" value="${displayIndex}">
 			<div class="main-header-wrap">
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-2 col-lg-2">
 							<div class="logo pt-40">
-								<a href="/blankShop/frontEnd/welcomePage"> <img
+								<a href="index.html"> <img
 									src="/blankShop/assets/img/logo/logo.png" width="150px" alt="">
 								</a>
 							</div>
@@ -61,15 +63,15 @@
 									<ul>
 										<li></li>
 										<li></li>
-										<li class="angle-shape"><a href="index.html">全部商品</a>
+										<li class="angle-shape"><a href="/blankShop/frontEnd/products/setIndex/1">全部商品</a>
 											<ul class="submenu">
-												<li><a href="index.html">上衣</a></li>
-												<li><a href="index-2.html">襯衫</a></li>
-												<li><a href="index-3.html">褲裝</a></li>
-												<li><a href="index.html">裙裝</a></li>
+												<li><a href="/blankShop/frontEnd/products/setIndex/2">上衣</a></li>
+												<li><a href="/blankShop/frontEnd/products/setIndex/3">襯衫</a></li>
+												<li><a href="/blankShop/frontEnd/products/setIndex/4">褲裝</a></li>
+												<li><a href="/blankShop/frontEnd/products/setIndex/5">裙裝</a></li>
 											</ul></li>
-										<li><a href="shop.html">最新商品</a></li>
-										<li><a href="contact-us.html">特價商品</a></li>
+										<li><a href="/blankShop/frontEnd/products/setIndex/6">最新商品</a></li>
+										<li><a href="/blankShop/frontEnd/products/setIndex/7">特價商品</a></li>
 										<li></li>
 										<li></li>
 
@@ -82,59 +84,31 @@
 								<div class="cart-wrap">
 									<button class="icon-cart-active">
 										<span class="icon-cart"> <i class="sli sli-bag"></i> <span
-											class="count-style">2</span>
-										</span> <span class="cart-price"> NT$ 320 </span>
+												class="count-style" id="cartCount"></span>
+										</span> $<span class="cart-price" id=crartTotalPrice></span>
 									</button>
-									<div class="shopping-cart-content">
+									<div class="shopping-cart-content" id="cartContent">
 										<div class="shopping-cart-top">
 											<h4>購物車</h4>
 											<a class="cart-close" href="#"><i class="sli sli-close"></i></a>
 										</div>
-										<ul>
-											<li class="single-shopping-cart">
-												<div class="shopping-cart-img">
-													<a href="#"><img alt=""
-														src="/blankShop/assets/img/cart/cart-1.svg"></a>
-													<div class="item-close">
-														<a href="#"><i class="sli sli-close"></i></a>
-													</div>
-												</div>
-												<div class="shopping-cart-title">
-													<h4>
-														<a href="#">Product Name </a>
-													</h4>
-													<span>1 x 90.00</span>
-												</div>
-											</li>
-											<li class="single-shopping-cart">
-												<div class="shopping-cart-img">
-													<a href="#"><img alt=""
-														src="/blankShop/assets/img/cart/cart-2.svg"></a>
-													<div class="item-close">
-														<a href="#"><i class="sli sli-close"></i></a>
-													</div>
-												</div>
-												<div class="shopping-cart-title">
-													<h4>
-														<a href="#">Product Name</a>
-													</h4>
-													<span>1 x 90.00</span>
-												</div>
-											</li>
+										<ul id="cart1" style="height: 350px;">
 										</ul>
 										<div class="shopping-cart-bottom">
 											<div class="shopping-cart-total">
 												<h4>
-													總計 : <span class="shop-total">NT$ 260</span>
+													總計 : $<span class="shop-total" id="subtotal"></span>
 												</h4>
 											</div>
 											<div class="shopping-cart-btn btn-hover text-center">
 												<a class="default-btn" href="/blankShop/frontEnd/viewcart">檢視購物車</a>
 											</div>
 										</div>
+									   
+
 									</div>
 								</div>
-								<div></div>
+								
 								<div class="setting-wrap">
 									<button class="setting-active">
 										<i class="sli sli-settings"></i>
@@ -151,7 +125,7 @@
 												<h4>會員帳號</h4>
 												<ul>
 													<li><a href="/blankShop/frontEnd/showmem">會員中心</a></li>
-													<li><a href="/blankShop/frontEnd/logOut" id="logout-btn">登出</a></li>
+													<li><a href="#" id="logout-btn">登出</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -168,7 +142,7 @@
 					<div class="row align-items-center">
 						<div class="col-6">
 							<div class="mobile-logo">
-								<a href="index.html"> <img alt=""
+								<a href="/blankShop/"> <img alt=""
 									src="/blankShop/assets/img/logo/logo.png" width="100px">
 								</a>
 							</div>
@@ -178,8 +152,8 @@
 								<div class="cart-wrap">
 									<button class="icon-cart-active">
 										<span class="icon-cart"> <i class="sli sli-bag"></i> <span
-											class="count-style">2</span>
-										</span> <span class="cart-price"> NT$ 320 </span>
+											class="count-style"></span>
+										</span> <span class="cart-price"></span>
 									</button>
 									<div class="shopping-cart-content">
 										<div class="shopping-cart-top">
@@ -219,7 +193,7 @@
 												</h4>
 											</div>
 											<div class="shopping-cart-btn btn-hover text-center">
-												 <a	class="default-btn" href="cart-page.html">檢視購物車</a>
+												 <a	class="default-btn" href="#">檢視購物車</a>
 											</div>
 										</div>
 									</div>
@@ -476,6 +450,7 @@
 	<script src="/blankShop/assets/js/ajax-mail.js"></script>
 	<!-- Main JS -->
 	<script src="/blankShop/assets/js/main.js"></script>
+	<script src="/blankShop/js/frontEnd/ShopCart-Header.js"></script>
 </body>
 
 </html>

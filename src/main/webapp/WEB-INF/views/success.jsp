@@ -374,7 +374,9 @@ button.big-button:active::before {
       });
       }
       //$("#1").attr("value", localStorage.getItem('totalPrice'));
-      localStorage.clear();
+      localStorage.removeItem("cartItems");
+	  localStorage.removeItem("totalPrice");
+	  
     </script>
 
     	<!-- jQuery JS -->
