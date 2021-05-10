@@ -105,7 +105,7 @@
 					padding: 0.3em;
 				}
 			</style>
-			<title>Insert title here</title>
+			<title></title>
 		</head>
 
 		<body>
@@ -115,13 +115,11 @@
 			
 			
 
-
+			
 
 			<table id="productTable" class="dataTable cell-border stripe hover" style="width: 100%">
 				<thead>
-					<tr>
-
-						
+					<tr>				
 						<th>型別編號</th>
 						<th>產品名稱</th>
 						<th>色碼</th>
@@ -130,19 +128,10 @@
 						<th>促銷價格</th>
 						<th>子分類</th>
 						<th>用途</th>
-						<th>庫存</th>
-						
-					
-
+						<th>庫存</th>	
 					</tr>
 				</thead>
 
-
-
-				
-
-
-			
 			</table>
 			<div style="text-align: center;" id="previewDialog" >
 				<h1 id="ptitle"></h1>
@@ -185,14 +174,16 @@
 						"rowId":"typeId",
 						"order": [[0, "desc"]],
 						"columnDefs": [
-							// { "width": "5%", "targets": 0 },
+							// { "width": "5%", "targets": 0},
 							{ targets: 2,
 							render: function(data) {
 								return "<div style='background-color:" +data+"'>&emsp;</div>"
 								}
 							}   
 						],
-						"aoColumns": [ {
+						"aoColumns": [
+							
+						{
 							"mData": "typeId"
 						}, {
 							"mData": "productName"
