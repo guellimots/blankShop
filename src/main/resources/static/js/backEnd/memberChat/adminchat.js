@@ -17,8 +17,8 @@ function enterChatRoom(userName){
     let usersTemplateHTML = "";
           
     usersTemplateHTML = usersTemplateHTML + 
-        '<a href="#" id="'+userName+'" onclick="selectUser(\'' + userName + '\')"><li class="clearfix">\n' +
-        '<img  src="/blankShop/img/product/icon.jpg"" width="100px" height="70px" alt="avatar" />\n' +
+        '<a href="#" id="'+userName+'" onclick="selectUser(\'' + userName + '\')"><li class="clearfix">' +
+        // '<img  src="/blankShop/img/product/icon.jpg"" width="100px" height="70px" alt="avatar" />\n' +
         '<div class="about">\n' +
         '<div id="userNameAppender_' + userName + '" class="name">' + userName + '</div>\n' +
         '<div class="status">\n' +
@@ -85,9 +85,9 @@ function connectToChat(userName) {
           
             usersTemplateHTML = usersTemplateHTML + 
                 '<a href="#" id="'+data.fromLogin+'"onclick="selectUser(\'' + data.fromLogin + '\')"><li class="clearfix">\n' +
-                '<img  src="/blankShop/img/product/icon.jpg"" width="100px" height="70px" alt="avatar" />\n' +
+                // '<img  src="/blankShop/img/product/icon.jpg"" width="100px" height="70px" alt="avatar" />\n' +
                 '<div class="about">\n' +
-                '<div id="userNameAppender_' + data.fromLogin + '" class="name">' + data.fromLogin + '</div>\n' +
+                '<div id="userNameAppender_' + data.fromLogin + '" class="name">' + data.fromLogin + '</div>' +
                 '<div class="status">\n' +
                 '<i class="fa fa-circle offline"></i>\n' +
                 '</div>\n' +
