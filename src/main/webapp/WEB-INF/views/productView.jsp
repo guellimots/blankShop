@@ -705,7 +705,7 @@
 							$("#snpd1").summernote("code", data["productDiscription1"]);
 							$("#snpd2").summernote("code", data["productDiscription2"]);
 						
-t
+
 							$('#selectNewName').attr("readonly","true");
 						
 

@@ -77,7 +77,7 @@ public class ProductService {
 				String ImgPath3 = fileUploadUtils.FileUpload(product.getMultipartFile3(), prod.getTypeId(), 3);
 				prod.setProductImgDir3(ImgPath3);
 			}
-			productRepository.updateProductName(product.getProductName(),product.getSalePrice(),product.getProductID());
+			productRepository.updateProductName(product.getProductName(),product.getSalePrice(),product.getProductID(),product.getColorCode());
 
 			
 			return true;
@@ -113,28 +113,61 @@ public class ProductService {
 	}
 
 	public synchronized boolean insert(Product product) throws IOException {
-
-		if (productRepository.findByProductID(product.getProductID()).isEmpty())
+		boolean status = true;
+		if (productRepository.findByProductID(product.getProductID()).isEmpty()) {
 			product.setProductID(productRepository.findTop1ByOrderByProductIDDesc().get().getProductID() + 1);
+			status = false;
+		};
 		
 			productRepository.save(product);
 
 		Optional<Product> prod = productRepository.findByProductIDAndColorCodeAndSize(product.getProductID(),
 				product.getColorCode(), product.getSize());
-		if (product.getMultipartFile1().isEmpty())
+		if (product.getMultipartFile1().isEmpty()) {
+			if(status) {
+				prod.get().setProductImgDir1(productRepository
+							.findByColorCodeAndProductID(product.getColorCode(), product.getProductID())
+							.get(0).getProductImgDir1());
+		
+			}
+			else	
 			prod.get().setProductImgDir1("/blankShop/img/product/noimage.jpg");
+		}
 		else {
 			String ImgPath = fileUploadUtils.FileUpload(product.getMultipartFile1(), prod.get().getTypeId(), 1);
 			prod.get().setProductImgDir1(ImgPath);
 		}
-		if (product.getMultipartFile2().isEmpty())
+		if (product.getMultipartFile2().isEmpty()) {
 			prod.get().setProductImgDir2("/blankShop/img/product/noimage.jpg");
+			if(status) {
+				prod.get().setProductImgDir2(productRepository
+							.findByColorCodeAndProductID(product.getColorCode(), product.getProductID())
+							.get(0).getProductImgDir2());
+		
+			}
+			else	
+			prod.get().setProductImgDir1("/blankShop/img/product/noimage.jpg");
+			
+			
+		}
+		
 		else {
 			String ImgPath2 = fileUploadUtils.FileUpload(product.getMultipartFile2(), prod.get().getTypeId(), 2);
 			prod.get().setProductImgDir2(ImgPath2);
 		}
-		if (product.getMultipartFile3().isEmpty())
+		if (product.getMultipartFile3().isEmpty()) {
 			prod.get().setProductImgDir3("/blankShop/img/product/noimage.jpg");
+			if(status) {
+				prod.get().setProductImgDir3(productRepository
+							.findByColorCodeAndProductID(product.getColorCode(), product.getProductID())
+							.get(0).getProductImgDir3());
+		
+			}
+			else	
+			prod.get().setProductImgDir1("/blankShop/img/product/noimage.jpg");
+			
+		}
+		
 		else {
 			String ImgPath3 = fileUploadUtils.FileUpload(product.getMultipartFile3(), prod.get().getTypeId(), 3);
 			prod.get().setProductImgDir3(ImgPath3);
