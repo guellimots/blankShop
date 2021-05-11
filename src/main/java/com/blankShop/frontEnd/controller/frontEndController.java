@@ -440,6 +440,7 @@ public class frontEndController {
 	@GetMapping("/product/{productID}")
 	public String loadProductPage(@PathVariable Integer productID, Model m) {
 		List<Product> products = pdService.findByProductID(productID);
+		System.out.println(products);
 		ArrayList<String> colorList = new ArrayList<String>();
 		ArrayList<String> imgList = new ArrayList<String>();
 

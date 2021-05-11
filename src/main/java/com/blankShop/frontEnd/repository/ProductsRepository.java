@@ -10,8 +10,8 @@ import com.blankShop.model.Product;
 
 public interface ProductsRepository  extends JpaRepository<Product, Integer>{
 	
-	
-	List<Product> findByProductIDAndProductStatusAndInMarketDateLessThan(Integer productId, String productStatus, String inMarketDay);
+	@Query(value="select * from Product where ProductID = ?1 and inMarketDate <='2021-05-14' and productStatus='上架中' ", nativeQuery=true)
+	List<Product> findWithProductID(Integer productId);
 	
 	@Query(value="select * from Product where inMarketDate <='2021-05-14' and productStatus='上架中' ", nativeQuery=true)
 	List<Product> allProducts();
