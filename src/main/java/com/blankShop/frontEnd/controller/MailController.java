@@ -64,7 +64,7 @@ public class MailController {
 		} else {
 			System.out.println("密碼不一樣");
 		}
-		return "login";
+		return "redirect:/frontEnd/loginPage";
 	}
 
 }

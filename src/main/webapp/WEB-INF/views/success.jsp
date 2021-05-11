@@ -239,7 +239,7 @@ button.big-button:active::before {
 					<div class="row align-items-center">
 						<div class="col-6">
 							<div class="mobile-logo">
-								<a href="index.html"> <img alt=""
+								<a href="/blankShop/frontEnd/welcomePage"> <img alt=""
 									src="/blankShop/assets/img/logo/logo.png" width="100px">
 								</a>
 							</div>

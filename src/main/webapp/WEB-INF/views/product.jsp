@@ -47,7 +47,7 @@
 					<div class="row">
 						<div class="col-xl-2 col-lg-2">
 							<div class="logo pt-40">
-								<a href="index.html"> <img
+								<a href="/blankShop/frontEnd/welcomePage"> <img
 									src="/blankShop/assets/img/logo/logo.png" width="150px" alt="">
 								</a>
 							</div>
@@ -137,7 +137,7 @@
 					<div class="row align-items-center">
 						<div class="col-6">
 							<div class="mobile-logo">
-								<a href="index.html"> <img alt=""
+								<a href="/blankShop/frontEnd/welcomePage"> <img alt=""
 									src="/blankShop/assets/img/logo/logo.png" width="100px">
 								</a>
 							</div>
