@@ -76,6 +76,7 @@
 
 								var money = [], age = [];
 								level = [];
+								var moneySort=[0,0,0,0,0,0],ageSort=[0,0,0,0,0,0];
 
 								for (let i = 0; i < mydata.length; i++) {
 									money.push(mydata[i].spending);
@@ -83,7 +84,28 @@
 									level.push(mydata[i].level);
 									// 		  console.log("money["+i+"]:"+money[i]);
 
+								}for (let j = 0; j < mydata.length; j++) {
+									if(age[j]<=25){
+										ageSort[0]+=1;
+										moneySort[0]+=money[j];
+									}else if(age[j]<=30 && age[j]>25){
+										ageSort[1]+=1;
+										moneySort[1]+=money[j];
+									}else if(age[j]<=35 && age[j]>30){
+                                        ageSort[2]+=1;
+                                        moneySort[2]+=money[j];
+                                    }else if(age[j]<=40 && age[j]>35){
+                                        ageSort[3]+=1;
+                                        moneySort[3]+=money[j];
+                                    }else if(age[j]<=45 && age[j]>40){
+                                        ageSort[4]+=1;
+                                        moneySort[4]+=money[j];
+                                    }else if(age[j]<=50 && age[j]>45){
+                                        ageSort[5]+=1;
+                                        moneySort[5]+=money[j];}
+									
 								}
+								
 
 								//     	  for(var ageSpent in results){
 								//     		  money.push(ageSpent.spending);
@@ -96,11 +118,11 @@
 
 								//準備圖表的數據  <訂單年齡消費金額分析圖>
 								var spentData = {
-									labels : age,
+									labels : ['<25','25-30','30-35','35-40','40-45','45-50'],
 									datasets : [ {
-										label : "總消費金額",
+										label : "年齡層區間消費金額",
 										fill : false,
-										data : money,
+										data : moneySort,
 										borderWidth : 1,
 										borderColor : '#00c0ef',
 										//     	              backgroundColor: 'rgba(66, 165, 245, 0.5)',
@@ -110,40 +132,42 @@
 												'rgba(255, 206, 86, 0.4)',
 												'rgba(255, 99, 132, 0.4)',
 												'rgba(54, 162, 235, 0.4)',
-												'rgba(255, 206, 86, 0.4)',
-												'rgba(255, 99, 132, 0.4)',
-												'rgba(54, 162, 235, 0.4)',
-												'rgba(255, 206, 86, 0.4)',
-												'rgba(255, 99, 132, 0.4)',
-												'rgba(54, 162, 235, 0.4)',
-												'rgba(255, 206, 86, 0.4)',
-												'rgba(255, 99, 132, 0.4)',
-												'rgba(54, 162, 235, 0.4)',
-												'rgba(255, 206, 86, 0.4)',
-												'rgba(255, 99, 132, 0.4)',
-												'rgba(54, 162, 235, 0.4)',
-												'rgba(255, 206, 86, 0.4)',
-												'rgba(255, 99, 132, 0.4)',
-												'rgba(54, 162, 235, 0.4)',
-												'rgba(255, 206, 86, 0.4)' ],
+												'rgba(255, 206, 86, 0.4)'
+// 												'rgba(255, 99, 132, 0.4)',
+// 												'rgba(54, 162, 235, 0.4)',
+// 												'rgba(255, 206, 86, 0.4)',
+// 												'rgba(255, 99, 132, 0.4)',
+// 												'rgba(54, 162, 235, 0.4)',
+// 												'rgba(255, 206, 86, 0.4)',
+// 												'rgba(255, 99, 132, 0.4)',
+// 												'rgba(54, 162, 235, 0.4)',
+// 												'rgba(255, 206, 86, 0.4)',
+// 												'rgba(255, 99, 132, 0.4)',
+// 												'rgba(54, 162, 235, 0.4)',
+// 												'rgba(255, 206, 86, 0.4)',
+// 												'rgba(255, 99, 132, 0.4)',
+// 												'rgba(54, 162, 235, 0.4)',
+// 												'rgba(255, 206, 86, 0.4)' 
+												],
 										borderColor : [ 'rgba(255,99,132,1)',
 												'rgba(54, 162, 235, 1)',
 												'rgba(255, 206, 86, 1)',
 												'rgba(255,99,132,1)',
 												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(255,99,132,1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(255,99,132,1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(255,99,132,1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(255,99,132,1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)' ],
+												'rgba(255, 206, 86, 1)'
+// 												'rgba(255,99,132,1)',
+// 												'rgba(54, 162, 235, 1)',
+// 												'rgba(255, 206, 86, 1)',
+// 												'rgba(255,99,132,1)',
+// 												'rgba(54, 162, 235, 1)',
+// 												'rgba(255, 206, 86, 1)',
+// 												'rgba(255,99,132,1)',
+// 												'rgba(54, 162, 235, 1)',
+// 												'rgba(255, 206, 86, 1)',
+// 												'rgba(255,99,132,1)',
+// 												'rgba(54, 162, 235, 1)',
+// 												'rgba(255, 206, 86, 1)' 
+												],
 
 									} ]
 								};
@@ -216,7 +240,7 @@
 								var myChart = new Chart(ctx, {
 									type : 'polarArea',
 									data : {
-										labels : [ "會員等級一", "會員等級二", "會員等級三" ],
+										labels : [ "Level 1(超過10,000)", "Level 2(超過5,000)", "Level 3(未滿5,000)" ],
 										datasets : [ {
 											label : '會員等級分布圖',
 											data : [ le1, le2, le3 ],
