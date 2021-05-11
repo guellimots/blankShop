@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -189,7 +191,7 @@ public class frontEndController {
 	@PostMapping("/googleLoginController")
 	@ResponseBody
 	public String googleLogin(@RequestParam(name = "idtoken") String idtoken, HttpSession session)
-			throws GeneralSecurityException, IOException {
+			throws GeneralSecurityException, IOException, ParseException {
 
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
 				.setAudience(Collections
@@ -214,6 +216,10 @@ public class frontEndController {
 			// save the member Info if the email does not exist in the database
 			if (memberService.checkMemberbyEmail(email) == false) {
 				Member member = new Member();
+			    String sDate1="1992-05-20";  
+			    Date date1=new SimpleDateFormat("yyyy-mm-dd").parse(sDate1);  
+				member.setBirthday(date1);
+				member.setAddress("待修改");
 				member.setMemberName(name);
 				member.setEmail(email);
 //				member.setGoogleImgUrl(pictureUrl);
