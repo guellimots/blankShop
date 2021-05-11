@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public List<Product> findByProductID(Integer productId) {
-		return productDao.findByProductID(productId);
+		return productDao.findByProductIDAndProductStatusAndInMarketDateLessThan(productId, "上架中", "2021-05-14");
 	}
 	
 	public List<Product> allProducts(){
