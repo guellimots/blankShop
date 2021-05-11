@@ -102,7 +102,7 @@
 			<label for="orderStatus">狀態</label> 
 			<select class="form-control select2" style="width: 100%;" id="status" name="orderStatus">
 				<option selected="selected"></option>
-				<option>訂單成立</option>
+				<option>訂單取消</option>
 				<option>理貨中</option>
 				<option>送貨中</option>
 				<option>已送達</option>				

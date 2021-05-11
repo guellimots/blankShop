@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public List<Product> findByProductID(Integer productId) {
-		return productDao.findByProductID(productId);
+		return productDao.findWithProductID(productId);
 	}
 	
 	public List<Product> allProducts(){

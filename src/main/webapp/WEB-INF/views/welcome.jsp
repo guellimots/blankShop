@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>welcome</title>
+<title>BlankShop</title>
 <meta name="description" content="">
 <meta name="google-signin-client_id"
 	content="528857856428-o80ljruk3qsht7gpqbmvnk49r9k5s8ca.apps.googleusercontent.com">
