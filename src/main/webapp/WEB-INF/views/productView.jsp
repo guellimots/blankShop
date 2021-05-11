@@ -262,13 +262,6 @@
 						<img id="newproductImgDir1" width="250" height="350">
 
 
-						<canvas id="myCanvas">
-						
-							</canvas>
-
-
-
-
 
 						<label for="productImgDir2">附圖2:</label> 
 						<input type="file" id="newmultipartFile2"name="multipartFile2" value="" > 
@@ -630,6 +623,13 @@
 					});
 
 				}
+				else
+				swal({
+							icon: 'error',	
+							title:"樣式重複!",
+							showConfirmButton: false,
+							timer: 2000
+							});
 				}
 
 
@@ -705,6 +705,7 @@
 							$("#snpd1").summernote("code", data["productDiscription1"]);
 							$("#snpd2").summernote("code", data["productDiscription2"]);
 						
+t
 							$('#selectNewName').attr("readonly","true");
 						
 
@@ -772,6 +773,14 @@
 						}
 					});
 				}
+				else
+				swal({
+							icon: 'error',	
+							title:"樣式重複!",
+							showConfirmButton: false,
+							timer: 2000
+							});
+				
 
 				}
 				//更新表單樣式

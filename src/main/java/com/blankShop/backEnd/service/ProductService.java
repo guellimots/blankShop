@@ -77,7 +77,7 @@ public class ProductService {
 				String ImgPath3 = fileUploadUtils.FileUpload(product.getMultipartFile3(), prod.getTypeId(), 3);
 				prod.setProductImgDir3(ImgPath3);
 			}
-			productRepository.updateProductName(product.getProductName(),product.getProductID());
+			productRepository.updateProductName(product.getProductName(),product.getSalePrice(),product.getProductID());
 
 			
 			return true;
@@ -87,6 +87,7 @@ public class ProductService {
 
 	public Product findById(Integer id) {
 		Optional<Product> product = productRepository.findById(id);
+		
 
 		return product.get();
 	}
@@ -115,8 +116,8 @@ public class ProductService {
 
 		if (productRepository.findByProductID(product.getProductID()).isEmpty())
 			product.setProductID(productRepository.findTop1ByOrderByProductIDDesc().get().getProductID() + 1);
-
-		productRepository.save(product);
+		
+			productRepository.save(product);
 
 		Optional<Product> prod = productRepository.findByProductIDAndColorCodeAndSize(product.getProductID(),
 				product.getColorCode(), product.getSize());
@@ -157,8 +158,13 @@ public class ProductService {
 
 		Optional<Product> product = productRepository.findByColorCodeAndProductNameAndSize(colorCode, productName,
 				size);
-		if (product.isPresent())
-		return false;
+		if (product.isPresent()) {
+			if(product.get().getProductName().equals(productName))
+			return true;
+			else
+			return false;
+		}
+		
 		else
 		return true;
 
