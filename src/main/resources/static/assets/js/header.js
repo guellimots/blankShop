@@ -19,7 +19,7 @@ logOutBtn.addEventListener("click", logOut);
 
 
 if(localStorage.getItem('cartItems')==null){
-	$(".count-style").css('visibility','hidden');
+	$(".count-style").html('0');
 	$(".cart-price").html('0');
 }
 else{

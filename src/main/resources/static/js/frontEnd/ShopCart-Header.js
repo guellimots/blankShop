@@ -52,5 +52,5 @@ for (var i = 0; i < cartItemsObj.length; i++) {
 }
 
 $("#subtotal").html(total);
-$("#cartCount").html(i);
+// $("#cartCount").html(i);
 $("#crartTotalPrice").html(total);
