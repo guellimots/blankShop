@@ -84,7 +84,7 @@
 				</div>
 				<div class="form-group">
 					<input class="form-control" placeholder="From:" name="mailfrom"
-						id="from">
+						id="from" value="blankshopcompany@gmail.com">
 				</div>
 				<div class="form-group">
 					<input class="form-control" placeholder="Subject:"

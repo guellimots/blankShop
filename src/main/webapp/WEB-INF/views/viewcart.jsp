@@ -230,7 +230,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                             <form action="#">
                                 <div class="table-content table-responsive cart-table-content">
-                                    <table style="width: 1250px;">
+                                    <table style="width: 1650px;">
                                         <thead>
                                             <tr>
                                                 <th>產品圖片</th>
@@ -260,7 +260,7 @@
                                     </div>
 
                                     <div class="col-3">
-                                        <div class="grand-totall">
+                                        <div class="grand-totall" style="margin-top: 8px;">
 
                                             <h4 class="grand-totall-title">總金額 <span id="summary"></span><span>$</span>
                                             </h4>
