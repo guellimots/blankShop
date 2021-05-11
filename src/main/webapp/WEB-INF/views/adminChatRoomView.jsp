@@ -57,11 +57,12 @@
             
 
             <button id="sendBtn">Send</button>
-
+            <button id="examplechat2">範例對話1</button>
+            <button id="examplechat3">範例對話2</button>
         </div> <!-- end chat-message -->
 
     </div> <!-- end chat -->
-
+  
 </div> <!-- end container -->
 
 <script id="message-template" type="text/x-handlebars-template">
@@ -104,8 +105,21 @@ $(function(){
    }
  
     registration()
+
+    $("#examplechat2").click(chatEx1)
+	$("#examplechat3").click(chatEx2)
     
 });
+function chatEx1(){
+				$("#message-to-send").val("好的已幫您取消")
+			}
+
+				
+			function chatEx2(){
+				$("#message-to-send").val("不好意思，該訂單已出貨?")
+			}
+
+
 </script>
 </body>
 </html>

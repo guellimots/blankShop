@@ -805,9 +805,11 @@
             <button id="sendBtn">送出</button>
 
         </div> <!-- end chat-message -->
-
+<examplechat1>
     </div> <!-- end chat -->
-
+<button id="examplechat1">哈囉鍵</button>
+<button id="examplechat2">範例對話1</button>
+<button id="examplechat3">範例對話2</button>
     </div>
 
 
@@ -872,11 +874,30 @@
                 $("#chatTo").attr("class","");
                 registration();
                 selectUser("admin");
+
+				$("#examplechat1").click(chatHi)
+				$("#examplechat2").click(chatEx1)
+				$("#examplechat3").click(chatEx2)
+    
     
             })
+
+			function chatHi(){
+				$("#message-to-send").val("您好")
+
+			}
+			function chatEx1(){
+				$("#message-to-send").val("想取消剛剛購買的燈芯絨襯衫")
+			}
+
+				
+			function chatEx2(){
+				$("#message-to-send").val("請問可以取消標語印花T恤的訂單嗎?")
+			}
+
+				
     
-                   
-    
+
                      var chatroom
     
                     chatroom = $("#message-dialog").dialog({
