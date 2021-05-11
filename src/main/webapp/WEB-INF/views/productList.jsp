@@ -273,7 +273,7 @@
 			<div class="container">
 				<div class="breadcrumb-content text-center">
 					<ul>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="/blankShop/frontEnd/welcomePage">Home</a></li>
 						<li class="active">Shop list</li>
 					</ul>
 				</div>
