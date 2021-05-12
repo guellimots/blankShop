@@ -137,6 +137,7 @@ public class ProductService {
 			String ImgPath = fileUploadUtils.FileUpload(product.getMultipartFile1(), prod.get().getTypeId(), 1);
 			prod.get().setProductImgDir1(ImgPath);
 		}
+		
 		if (product.getMultipartFile2().isEmpty()) {
 			prod.get().setProductImgDir2("/blankShop/img/product/noimage.jpg");
 			if(status) {
@@ -146,7 +147,7 @@ public class ProductService {
 		
 			}
 			else	
-			prod.get().setProductImgDir1("/blankShop/img/product/noimage.jpg");
+			prod.get().setProductImgDir2("/blankShop/img/product/noimage.jpg");
 			
 			
 		}
@@ -164,7 +165,7 @@ public class ProductService {
 		
 			}
 			else	
-			prod.get().setProductImgDir1("/blankShop/img/product/noimage.jpg");
+			prod.get().setProductImgDir3("/blankShop/img/product/noimage.jpg");
 			
 		}
 		

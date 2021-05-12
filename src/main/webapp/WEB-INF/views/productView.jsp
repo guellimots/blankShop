@@ -1282,14 +1282,13 @@
 									$("#selectproductPrice").val(1280);
 									$("#createStock").val(12);
 									$("#selectDate").val("2021-05-14");
-									$("#snpd2").summernote("code","&nbsp;&nbsp;&nbsp;"+
-																	"<ul><li>手洗不可漂白"+
-																	"<li>不可烘乾"+
-																	"<li>低溫隔布熨燙"+
-																	"<li>在陰影下平晾陰乾"+
-																	"<li>請勿浸泡"+
-																	"<li>避免深淺色混合洗滌"+
-																	"<li>反面洗滌")
+									$("#snpd2").summernote("code","手洗不可漂白<br>"+
+																	"不可烘乾<br>"+
+																	"低溫隔布熨燙<br>"+
+																	"在陰影下平晾陰乾<br>"+
+																	"請勿浸泡<br>"+
+																	"避免深淺色混合洗滌<br>"+
+																	"反面洗滌")
 									$("#snpd1").summernote("code","圓領／背面印花／寬鬆版型<br>"+
 																	"93.5%Cotton／6.5%Spandex<br>"+
 																	"Made in China")
