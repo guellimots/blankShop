@@ -68,11 +68,6 @@
 					}).done(
 							function(mydata) {
 								console.log(mydata);
-								//把資料分成兩個array
-								//var data01=JSON.stringify(mydata,null,4);
-								//console.log("data01:"+data01);
-								//var results=JSON.parse(mydata);
-								//console.log("results: "+results);
 
 								var money = [], age = [];
 								level = [];
@@ -133,21 +128,7 @@
 												'rgba(255, 99, 132, 0.4)',
 												'rgba(54, 162, 235, 0.4)',
 												'rgba(255, 206, 86, 0.4)'
-// 												'rgba(255, 99, 132, 0.4)',
-// 												'rgba(54, 162, 235, 0.4)',
-// 												'rgba(255, 206, 86, 0.4)',
-// 												'rgba(255, 99, 132, 0.4)',
-// 												'rgba(54, 162, 235, 0.4)',
-// 												'rgba(255, 206, 86, 0.4)',
-// 												'rgba(255, 99, 132, 0.4)',
-// 												'rgba(54, 162, 235, 0.4)',
-// 												'rgba(255, 206, 86, 0.4)',
-// 												'rgba(255, 99, 132, 0.4)',
-// 												'rgba(54, 162, 235, 0.4)',
-// 												'rgba(255, 206, 86, 0.4)',
-// 												'rgba(255, 99, 132, 0.4)',
-// 												'rgba(54, 162, 235, 0.4)',
-// 												'rgba(255, 206, 86, 0.4)' 
+
 												],
 										borderColor : [ 'rgba(255,99,132,1)',
 												'rgba(54, 162, 235, 1)',
@@ -155,18 +136,7 @@
 												'rgba(255,99,132,1)',
 												'rgba(54, 162, 235, 1)',
 												'rgba(255, 206, 86, 1)'
-// 												'rgba(255,99,132,1)',
-// 												'rgba(54, 162, 235, 1)',
-// 												'rgba(255, 206, 86, 1)',
-// 												'rgba(255,99,132,1)',
-// 												'rgba(54, 162, 235, 1)',
-// 												'rgba(255, 206, 86, 1)',
-// 												'rgba(255,99,132,1)',
-// 												'rgba(54, 162, 235, 1)',
-// 												'rgba(255, 206, 86, 1)',
-// 												'rgba(255,99,132,1)',
-// 												'rgba(54, 162, 235, 1)',
-// 												'rgba(255, 206, 86, 1)' 
+
 												],
 
 									} ]
@@ -180,10 +150,13 @@
 									type : 'bar',
 									data : spentData,
 									options : {
+										responsiveAnimationDuration: 8000,
 										title : {
 											display : true,
 											text : '會員年齡與消費金額',
 											fontSize : 30,
+											
+										  
 										},
 
 // 										scales : {
@@ -252,6 +225,7 @@
 									},
 									
 									options : {
+										responsiveAnimationDuration: 3000,
 										title : {
 											display : true,
 											text : '會員之消費級別分布比例',
@@ -302,6 +276,7 @@
 										} ]
 									},
 									options : {
+										responsiveAnimationDuration: 3000,
 										legend : {
 											display : false
 										},
@@ -360,6 +335,7 @@
 									type : 'bar',
 									data : spentData,
 									options : {
+										responsiveAnimationDuration: 3000,
 										title : {
 											display : true,
 											text : '七日銷售額統計圖',
