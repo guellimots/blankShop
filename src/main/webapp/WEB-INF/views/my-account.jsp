@@ -558,7 +558,7 @@ $('#btn1').mousedown(function() {
 
   //一鍵輸入
   $("#btn2").click(function () {
-                $("#address").val("106台北市大安區復興南路一段390號2樓");
+                $("#address").val("106470 台北市大安區復興南路一段390號2樓");
                 $("#cellphone").val("0987654321");
 				$("#birthday").val("1994-02-17");
 				
