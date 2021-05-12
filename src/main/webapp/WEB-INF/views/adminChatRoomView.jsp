@@ -116,7 +116,7 @@ function chatEx1(){
 
 				
 			function chatEx2(){
-				$("#message-to-send").val("不好意思，該訂單已出貨?")
+				$("#message-to-send").val("不好意思，該訂單已出貨")
 			}
 
 
