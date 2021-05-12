@@ -107,14 +107,14 @@ function CheckForm()
 
 //});
 function KeyIn() {
-		document.getElementById("mobile").value = "0911-478-311";
-		document.getElementById("empName").value = "張校天";
-		document.getElementById("password").value = "@!!123abc";
-		document.getElementById("personID").value = "C131147399";
-		document.getElementById("birthday").value = "1987-10-10";	
-		document.getElementById("hireDate").value = "2020-12-25";	
-		document.getElementById("address").value = "242030新北市蘆洲區集賢路一段80巷39號";
-		document.getElementById("email").value = "showten@gmail.com";	
+		document.getElementById("mobile").value = "0921-477-301";
+		document.getElementById("empName").value = "陳時中";
+		document.getElementById("password").value = "@!!1%3abc";
+		document.getElementById("personID").value = "O154700304";
+		document.getElementById("birthday").value = "1954-12-10";	
+		document.getElementById("hireDate").value = "2022-03-15";	
+		document.getElementById("address").value = "100030 100台北市中正區林森南路6號";
+		document.getElementById("email").value = "clock@gmail.com";	
 		document.getElementById("verifyNameResult").innerHTML ="";
 		document.getElementById("verifyMobileResult").innerHTML ="";
 		document.getElementById("verifyBirthResult").innerHTML ="";
