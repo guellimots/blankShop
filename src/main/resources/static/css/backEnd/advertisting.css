@@ -22,5 +22,12 @@ body {
 	margin-top: 80px;
 	margin-left: 60px;
 	margin-right: 60px;
+}
 
+th{
+    font-size: 14px;
+}
+
+td{
+	font-size: 14px;
 }

@@ -199,6 +199,21 @@ $(document).ready(function(){
     
     const messageControls = document.querySelector('#message-controls')
     messageControls.addEventListener('submit', sendMessage, true)
+
+
+    $("#example1").on('click',function(){
+        document.getElementById("message").value = "+1，謝謝建瀚大大";
+    })
+
+    $("#example2").on('click',function(){
+        document.getElementById("message").value = "+1，謝謝建瀚主管";
+    })
+
+    $("#example3").on('click',function(){
+        document.getElementById("message").value = "小意思，大家要繼續努力工作喔!";
+    })
+
+
 })
 
 

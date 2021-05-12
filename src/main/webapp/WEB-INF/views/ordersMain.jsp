@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/blankShop/plugins/uplot/uPlot.min.css">
 <link rel="stylesheet" href="/blankShop/css/backEnd/adminlte.min.css">
 <link rel="stylesheet" href="/blankShop/css/backEnd/advertisting.css">
+<link rel="stylesheet" href="/blankShop/css/backEnd/ordersMain.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
 
 <script src="/blankShop/js/backEnd/jquery-3.5.1.js"></script>

@@ -30,9 +30,6 @@
                         <div class="card-header">
                             <h3 class="card-title">聊天室</h3>        
                             <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                  </button>
                             </div>
                             <div class="d-flex bd-highlight">
                                 <div class="chat-summary">
@@ -56,7 +53,9 @@
                 </div>
             <!-- </div> -->
         </div>
-    
+        <button type="submit" id="example1">員工1</button>
+        <button type="submit" id="example2">員工2</button>
+        <button type="submit" id="example3">主管</button>
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>

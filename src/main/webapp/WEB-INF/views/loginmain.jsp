@@ -28,7 +28,8 @@
 			<p>${errormsg.msg}</p> 
 			<input type="submit" value="登入" class="submit-btn">
 			<input type="button" id="manager" value="主管">
-			<input type="button" id="employee" value="員工">
+			<input type="button" id="employee1" value="員工1">
+			<input type="button" id="employee2" value="員工2">
 		</form>
 	</div>	
 	

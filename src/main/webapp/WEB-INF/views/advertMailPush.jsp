@@ -22,6 +22,7 @@
 <script src="/blankShop/js/backEnd/jquery-3.5.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="/blankShop/css/backEnd/advertisting.css">
 <script src="/blankShop/js/backEnd/jquery.dataTables.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta name="keywords" content="html,css,javascript,bootstrap4,jquery,jquery-ui">

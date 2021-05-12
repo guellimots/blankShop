@@ -321,7 +321,7 @@
               						<div class="card-body" align="center">
               							<img class="direct-chat-img" src="/blankShop/img/backEnd/avatar.png" alt="Message User Image">
               							<div class = "direct-chat-text">
-              								<marquee width = "90%" direction = "right" id="marqueeMsg"></marquee>
+              								<marquee width = "90%" direction = "left" id="marqueeMsg"></marquee>
               							</div>      						
               						</div>
            					 	</div>

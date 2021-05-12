@@ -13,6 +13,11 @@ $(document).ready(function(){
         modal: true,
         resizable:false,
         buttons: {
+
+			"訊息": function(){
+				document.getElementById("msg").value = "今天林建瀚主管請各位同仁喝飲料，要喝的請在群組回復"
+			},
+
             "送出 ": function(){  
                 $.ajax({
                         url: "/blankShop/backEnd/InsertMessage?msg="+$("#msg").val(),
@@ -29,6 +34,7 @@ $(document).ready(function(){
             "關閉": function () {
                 createmsgDialog.dialog("close");
             }
+
         }   
     });
 
