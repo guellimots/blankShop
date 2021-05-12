@@ -902,7 +902,7 @@
     
                     chatroom = $("#message-dialog").dialog({
                     autoOpen: false,
-                    height: 820,
+                    height: 800,
                     width: 480,
                     modal: false,
                     resizable:true,
