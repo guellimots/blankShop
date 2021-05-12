@@ -1282,7 +1282,8 @@
 									$("#selectproductPrice").val(1280);
 									$("#createStock").val(12);
 									$("#selectDate").val("2021-05-14");
-									$("#snpd2").summernote("code","<ul><li>手洗不可漂白"+
+									$("#snpd2").summernote("code","&nbsp;&nbsp;&nbsp;"+
+																	"<ul><li>手洗不可漂白"+
 																	"<li>不可烘乾"+
 																	"<li>低溫隔布熨燙"+
 																	"<li>在陰影下平晾陰乾"+
