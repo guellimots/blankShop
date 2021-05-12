@@ -26,10 +26,6 @@ public class MemberChatController {
 		return "adminChatRoomView";
 	}
 	
-	
-	
-
-	
 
 	@GetMapping("/adminChatRoom")
 	public String AdminChatRoom() {

@@ -57,11 +57,14 @@ public class AdvertistingController {
 			boolean insertResult = adService.save(newImg);
 			if (insertResult == true) {
 				result = "上傳成功";
+				logger.info("新增"+title.toString()+"成功");
 			} else {
 				result = "上傳失敗";
+				logger.error("新增"+title.toString()+"失敗");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("呼叫adService發生錯誤:"+e);
 		}
 
 		m.addAttribute("uploadResult", result);

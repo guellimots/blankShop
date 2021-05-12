@@ -14,7 +14,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry endpointRegistry) {
         // 註冊一個給Client連至WebSocket Server的節點(websocket endpoint)
         endpointRegistry.addEndpoint("/chat").withSockJS(); 
-//        endpointRegistry.addEndpoint("/chat").setAllowedOrigins("*").withSockJS();
         endpointRegistry.addEndpoint("/backEnd").withSockJS(); 
     }
 

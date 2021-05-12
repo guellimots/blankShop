@@ -140,6 +140,7 @@ public class AdminController {
 	@GetMapping("/getallMember")
 	@ResponseBody
 	public Integer getDayTotalorder(Membertotal member) {
+		logger.info("呼叫 memberservice 查詢所有會員");
 		Integer allmember = memberservice.findallMember();
 		if(allmember != null) {
 			member.setTotalMember(allmember);

@@ -113,7 +113,7 @@ function KeyIn() {
 		document.getElementById("personID").value = "O154700304";
 		document.getElementById("birthday").value = "1954-12-10";	
 		document.getElementById("hireDate").value = "2022-03-15";	
-		document.getElementById("address").value = "100030 100台北市中正區林森南路6號";
+		document.getElementById("address").value = "100030 台北市中正區林森南路6號";
 		document.getElementById("email").value = "clock@gmail.com";	
 		document.getElementById("verifyNameResult").innerHTML ="";
 		document.getElementById("verifyMobileResult").innerHTML ="";
