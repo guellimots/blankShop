@@ -4,8 +4,9 @@
   <head>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="google-signin-client_id" content="528857856428-o80ljruk3qsht7gpqbmvnk49r9k5s8ca.apps.googleusercontent.com">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<meta name="google-signin-client_id" content="528857856428-o80ljruk3qsht7gpqbmvnk49r9k5s8ca.apps.googleusercontent.com">
+    <title>BlankShop</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- <META HTTP-EQUIV="REFRESH" CONTENT="3;URL=http://localhost:8080/blankShop/frontEnd/welcome"> -->
       <link rel="shortcut icon" type="image/x-icon"
 	href="/blankShop/assets/img/favicon.png">

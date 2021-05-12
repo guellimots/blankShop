@@ -9,6 +9,8 @@
       <meta http-equiv="refresh" content="2;url=http://localhost:8080/blankShop/frontEnd/welcomePage" />
       <title>BlankShop</title>
       <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-4de243a40619a967c0bf13b95e1ac6f8de89d943b7fc8710de33f681fe287604.css">
+      <link rel="shortcut icon" type="image/x-icon"
+	href="/blankShop/assets/img/favicon.png">
       <style>
          @import url("https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans");
   body {
