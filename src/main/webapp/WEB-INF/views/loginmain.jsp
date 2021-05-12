@@ -14,8 +14,8 @@
 <body>
 	<div class="login-wrapper">
 		<form action="BlankShop_Admin" class="form">
-			<img src="/blankShop/img/backEnd/avatar.png">
-			<h2>Admin管理系統</h2>
+			<img src="/blankShop/img/backEnd/favicon.png">
+			<h2>BlankShop後台管理系統</h2>
 			<div class="input-group">
 				<input type="text" name="account" id="loginUser" required> 
 				<label for="loginUser">帳號</label>
